@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Mail\SupportController;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,15 +18,14 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
-/* Route::get('/forgot-password', function () {
-    return view('auth.password.reset');
-})->middleware('auth')->name('password.request');
- */
-
-Route::post('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::middleware(['auth:sanctum', 'verified'])->get('/password', function () {
+    return view('dashboard');
+})->name('password');
 
 Auth::routes();
 
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Auth::routes();
 

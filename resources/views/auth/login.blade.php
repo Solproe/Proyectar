@@ -4,7 +4,7 @@
 @section('content')
 <div class="login-box">
     <div class="login-logo">
-        <a href="{{ url('/home') }}"><b>{{ config('app.name') }}</b></a>
+        <a href="{{ route('login') }}"><b>{{ config('app.name') }}</b></a>
     </div>
     <!-- /.login-logo -->
 
@@ -13,7 +13,7 @@
         <div class="card-body login-card-body">
             <p class="login-box-msg">{{ __('auth.login.title') }}</p>
 
-            <form method="post" action="{{ url('/login') }}">
+            <form method="post" action="{{ route('/login') }}">
                 @csrf
 
                 <div class="input-group mb-3">
