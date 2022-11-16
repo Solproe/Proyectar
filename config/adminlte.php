@@ -62,13 +62,13 @@ return [
     | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Basic-Configuration
     |
     */
-
-    'logo' => '',
-    'logo_img' => 'vendor/adminlte/dist/img/logo.jpeg',
-    'logo_img_class' => 'brand-image img-circle elevation-3',
+    /* 'vendor/adminlte/dist/img/logo.jpeg */
+    'logo' => 'Ambulancias Proyectar SAS',
+    'logo_img' => 'vendor/adminlte/dist/img/logo.png',
+    'logo_img_class' => null,
     'logo_img_xl' => null,
-    'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => 'Admin Logo',
+    'logo_img_xl_class' => null,
+    'logo_img_alt' => '',
 
     /*
     |--------------------------------------------------------------------------
@@ -86,8 +86,8 @@ return [
     'auth_logo' => [
         'enabled' => false,
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
-            'alt' => 'Auth Logo',
+            'path' => 'vendor/adminlte/dist/img/logo.png',
+            'alt' => null,
             'class' => '',
             'width' => 50,
             'height' => 50,
@@ -109,8 +109,8 @@ return [
     'preloader' => [
         'enabled' => true,
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
-            'alt' => 'AdminLTE Preloader Image',
+            'path' => '#',
+            'alt' => '',
             'effect' => 'animation__shake',
             'width' => 60,
             'height' => 60,
@@ -192,7 +192,7 @@ return [
     'classes_content_wrapper' => '',
     'classes_content_header' => '',
     'classes_content' => '',
-    'classes_sidebar' => 'sidebar-dark-primary elevation-4',
+    'classes_sidebar' => 'sidebar-ligth-primary elevation-4',
     'classes_sidebar_nav' => '',
     'classes_topnav' => 'navbar-white navbar-light',
     'classes_topnav_nav' => 'navbar-expand',
@@ -312,7 +312,7 @@ return [
             'can'  => 'manage-blog',
         ],
         [
-            'text'        => 'pages',
+            'text'        => 'Call Center',
             'url'         => 'admin/pages',
             'icon'        => 'far fa-fw fa-file',
             'label'       => 4,

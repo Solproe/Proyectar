@@ -13,7 +13,7 @@
         <div class="card-body login-card-body">
             <p class="login-box-msg">{{ __('auth.login.title') }}</p>
 
-            <form method="post" action="{{ route('/login') }}">
+            <form method="post" action="{{ route('login') }}">
                 @csrf
 
                 <div class="input-group mb-3">
