@@ -1,2 +1,21 @@
-@import '../../node_modules/bootstrap';
-@import '../../node_modules/admin-lte/dist/css/adminlte.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 
+ * Always set the map height explicitly to define the size of the div element
+ * that contains the map. 
+ */
+ #map {
+    height: 100%;
+  }
+  
+  /* 
+   * Optional: Makes the sample page fill the window. 
+   */
+  html,
+  body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }

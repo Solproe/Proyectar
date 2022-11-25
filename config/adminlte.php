@@ -381,7 +381,7 @@ return [
         [
             'text'       => 'information',
             'icon_color' => 'cyan',
-            'url'        => '#',
+            'route'        => 'ambulance.index',
         ],
     ],
 
@@ -537,5 +537,5 @@ return [
     |
     */
 
-    'livewire' => false,
+    'livewire' => true,
 ];

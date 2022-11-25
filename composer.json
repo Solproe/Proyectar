@@ -10,9 +10,12 @@
         "infyomlabs/laravel-ui-adminlte": "^5.1",
         "jeroennoten/laravel-adminlte": "^3.8",
         "laravel/framework": "^9.19",
+        "laravel/jetstream": "^2.12",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
-        "livewire/livewire": "^2.10",
+        "laravel/ui": "*",
+        "livewire/livewire": "^2.5",
+        "mjaschen/phpgeo": "^4.2",
         "spatie/laravel-permission": "^5.5"
     },
     "require-dev": {

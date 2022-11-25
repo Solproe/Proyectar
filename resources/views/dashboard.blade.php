@@ -1,0 +1,1 @@
+@implements('adminlte:page')
