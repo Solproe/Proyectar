@@ -15,27 +15,9 @@ class Tugps24 extends Component
 
     public function render()
     {
-        $headers = array(
-            'Content-Type:application/json',
-        );
-
         $reponse = new tugps24API();
 
         $this->data = $reponse->getDataFromAPI();
-
-        $request = curl_init();
-
-        curl_setopt($request, CURLOPT_URL, $this->API_URL.$this->API_TOKEN);
-
-        curl_setopt($request, CURLOPT_HTTPHEADER, $headers);
-
-        curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
-
-        $response = json_decode(curl_exec($request));
-
-        $info = curl_getinfo($request);
-
-        curl_close($request);
 
         return view('livewire.tugps24');
     }

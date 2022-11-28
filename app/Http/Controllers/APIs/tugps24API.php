@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\APIs;
 
 use App\Http\Controllers\Controller;
+use App\Models\APIs\geocodingGoogleAPI;
 use App\Models\APIs\tugps24API as APIsTugps24API;
+use App\Models\Data\validateDistance;
 use Location\Coordinate;
 use Location\Distance\Haversine;
 use Location\Distance\Vincenty;
@@ -22,32 +24,29 @@ class tugps24API extends Controller
 
         $matriz =  array();
 
-        foreach ($coordinates as $data)
-        {   
-            $line = new Line(
-                new Coordinate(floatval($data->Latitud), floatval($data->Longitud)),
-                new Coordinate(10.471181, -73.241624)
-            );
+        $geoCodingGoogleAPI = new geocodingGoogleAPI();
 
-            $length = $line->getLength(new Haversine());
+        foreach ($coordinates as $data)
+        {
+            $direccion = 'carrera 6a #19-44, Valledupar, Colombia';
+
+            $response = $geoCodingGoogleAPI->getAddressGeocoding($direccion);
+
+            $address = $geoCodingGoogleAPI->getInverseGeoCoding([$data->Latitud, $data->Longitud]);
+
+            $validateDistance = new validateDistance();
+
+            $Distance = $validateDistance->getDistance([$data->Latitud, $data->Longitud], [$response[0], $response[1]]);
 
             $newData = ['Plate' => $data->Plate, 
-                        'Latitude' => $data->Latitud, 
-                        'Length' => $data->Longitud, 
-                        'Distance' => $length];
+                        'Address' => $address,
+                        'Distance' => round($Distance / 1000, 3)];
 
             $matriz [] = $newData;
 
             $newData = null;
         }
 
-        /* dd($matriz); */
-
         return $matriz;
-    }
-
-    public function showAmbulances()
-    {
-        dd('data');
     }
 }
