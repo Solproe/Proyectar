@@ -40,7 +40,7 @@ class tugps24API extends Controller
 
             $newData = ['Plate' => $data->Plate, 
                         'Address' => $address,
-                        'Distance' => round($Distance / 1000, 3)];
+                        'Distance' => 0];
 
             $matriz [] = $newData;
 

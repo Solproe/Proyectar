@@ -1,8 +1,5 @@
 <div>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-    <button wire:click="showAmbulances()" type="submit" class="btn btn-outline-success">
-        data
-    </button>
     @if($data != null)
         <table class="table">
             <thead>
