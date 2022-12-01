@@ -3,15 +3,25 @@
 namespace App\Http\Livewire;
 
 use App\Http\Controllers\APIs\tugps24API;
+use App\Models\APIs\geocodingGoogleAPI;
+use App\Models\Data\validateDistance;
 use Livewire\Component;
 
 class Tugps24 extends Component
 {
     public $data;
 
-    public $API_TOKEN = '616d6270726f796563746172~416d6250726f79656374617231323321';
+    public $address;
 
-    public $API_URL = 'https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=AIzaSyA1APsLdkwFAPDXCR3TCLu-ZKITLuftxlo';
+    public $matriz;
+
+    public $min;
+
+    public $type;
+
+    public $document;
+
+    public $typetransfer;
 
     public function render()
     {
@@ -20,5 +30,41 @@ class Tugps24 extends Component
         $this->data = $reponse->getDataFromAPI();
 
         return view('livewire.tugps24');
+    }
+
+    public function distance()
+    {
+        $this->matriz = null;
+
+        $geoCodingGoogleAPI = new geocodingGoogleAPI();
+
+        $response = $geoCodingGoogleAPI->getAddressGeocoding($this->address);
+
+        $validateDistance = new validateDistance();
+
+        $this->matriz = array();
+
+        $min = array();
+
+        foreach ($this->data as $key => $data) {
+            
+            $distance = $validateDistance->getDistance([$data['Latitud'], $data['Longitud']], [$response[0], $response[1]]);
+
+            $this->matriz[] = ['Plate' => $data['Plate'], 'Distance' => $distance];
+
+            $min [] = $distance;
+        }
+
+        $data = null;
+
+        foreach ($this->matriz as $data)
+        {
+            if ($data['Distance'] == min($min)){
+
+                $this->min = $data;
+
+                break;
+            }
+        }
     }
 }

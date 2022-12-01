@@ -23,8 +23,8 @@ class validateDistance
         $calculator = new Vincenty();
 
         $data = $calculator->getDistance(new Coordinate(floatval(str_replace(',', '.', $coordinate2[0])), floatval(str_replace(',', '.',$coordinate2[1]))),
-        new Coordinate(floatval(str_replace(',', '.', $coordinate1[0])), floatval(str_replace(',', '.', $coordinate1[1]))));
+            new Coordinate(floatval(str_replace(',', '.', $coordinate1[0])), floatval(str_replace(',', '.', $coordinate1[1]))));
 
-        return $data;
+        return round($data / 1000, 3);
     }
 }

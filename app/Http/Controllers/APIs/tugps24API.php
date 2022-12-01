@@ -5,11 +5,6 @@ namespace App\Http\Controllers\APIs;
 use App\Http\Controllers\Controller;
 use App\Models\APIs\geocodingGoogleAPI;
 use App\Models\APIs\tugps24API as APIsTugps24API;
-use App\Models\Data\validateDistance;
-use Location\Coordinate;
-use Location\Distance\Haversine;
-use Location\Distance\Vincenty;
-use Location\Line;
 
 class tugps24API extends Controller
 {
@@ -28,19 +23,13 @@ class tugps24API extends Controller
 
         foreach ($coordinates as $data)
         {
-            $direccion = 'carrera 6a #19-44, Valledupar, Colombia';
-
-            $response = $geoCodingGoogleAPI->getAddressGeocoding($direccion);
-
             $address = $geoCodingGoogleAPI->getInverseGeoCoding([$data->Latitud, $data->Longitud]);
-
-            $validateDistance = new validateDistance();
-
-            $Distance = $validateDistance->getDistance([$data->Latitud, $data->Longitud], [$response[0], $response[1]]);
 
             $newData = ['Plate' => $data->Plate, 
                         'Address' => $address,
-                        'Distance' => 0];
+                        'Distance' => 0,
+                        'Latitud' => $data->Latitud,
+                        'Longitud' => $data->Longitud];
 
             $matriz [] = $newData;
 
