@@ -14,6 +14,8 @@
 
         <!-- Scripts -->
 
+        <script src="js/createNotification.js"></script>
+
         <!-- Styles -->
         @livewireStyles
     </head>

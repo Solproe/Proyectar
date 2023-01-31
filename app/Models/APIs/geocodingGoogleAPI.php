@@ -13,7 +13,9 @@ class geocodingGoogleAPI
 
     public function getAddressGeocoding($address)
     {
-        $geo = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address='.urlencode($address).'&key='.urlencode($this->API_TOKEN));
+        $ad = $address . ",valledupar,colombia";
+
+        $geo = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address='.urlencode($ad).'&key='.urlencode($this->API_TOKEN));
 
         $geo = json_decode($geo, true);
 

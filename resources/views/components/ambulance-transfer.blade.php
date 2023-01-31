@@ -5,7 +5,7 @@
                 <label>Patient Name:</label>
             </div>
             <div class="col">
-                <input type="text">
+                <input type="text" id="patientName">
             </div>
         </div>
         <div class="col">
@@ -111,7 +111,7 @@
             </div>
         </div>
         <div class="col" style="left: 10%;">
-            <button class="btn btn-outline-primary">Ask</button>
+            <button class="btn btn-outline-primary" type="submit" id="send">Ask</button>
         </div>
     </div>
     <style>
@@ -119,4 +119,8 @@
             margin: 1.5%;
         }
     </style>
+
+    <script>
+        
+    </script>
 </div>

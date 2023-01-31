@@ -1,1 +1,1 @@
-@implements('adminlte:page')
+@extends('adminlte::page')

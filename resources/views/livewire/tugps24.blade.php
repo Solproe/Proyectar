@@ -9,7 +9,7 @@
                     <option value="emergencia">Emergencia</option>
                     <option value="traslado">Traslado</option>
                 </select>
-                <button wire:click="distance()" type="submit" class="btn btn-outline-success" style="margin-left: 4%;">
+                <button wire:click="distance()" type="submit" onclick="send();" class="btn btn-outline-success" style="margin-left: 4%;">
                     Search
                 </button>
             </div>
@@ -53,4 +53,6 @@
         </tbody>
     </table>
     @endif
+
+    <script src="{{ asset('js/sendNotification.js') }}"></script>
 </div>

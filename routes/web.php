@@ -31,6 +31,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Auth::routes();
 
 Route::get('ambulance', [AmbulanceControl::class, 'index'])->name('ambulance.index');
+Route::get('status', [AmbulanceControl::class, 'status'])->name('ambulance.status');
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

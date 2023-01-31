@@ -374,12 +374,12 @@ return [
             'url'        => '#',
         ],
         [
-            'text'       => 'warning',
+            'text'       => 'Status',
             'icon_color' => 'yellow',
-            'url'        => '#',
+            'route'        => 'ambulance.status',
         ],
         [
-            'text'       => 'information',
+            'text'       => 'Ambulances',
             'icon_color' => 'cyan',
             'route'        => 'ambulance.index',
         ],
