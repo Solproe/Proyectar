@@ -1,7 +1,6 @@
 function createNewElement(data, num) {
     const tbody = document.getElementById("tbody");
-    alert(data.name);
-    tbody.innerHTML += '<tr><th scope="row">1</th><td>' + data.name + '</td><td>' + data.status + '</td></tr>';
+    tbody.innerHTML += '<tr><th scope="row">' + num + '</th><td>' + data.name + '</td><td>' + data.status + '</td></tr>';
 }
 
 function getAllRequests() {
