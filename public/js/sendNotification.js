@@ -5,6 +5,7 @@ function data() {
         alert("abierta la conexion");
         var data = {
             type: "transfer",
+            status: "sent",
             name: "JPY956. MOVIL.11",
             device: "fD2QDILlRB6KzSGIUClE8h:APA91bGzIA3iuPr_Gt3KpeX3Bpu9YJ3FWvActkWpBNcK4a1_3f8rawMPpGUJrw-OLOeJPHJMBB-VPY6IRtsF7fwzu5rl8HwUbVHrCKvWDGQ6xNhGTpux62AYGkFyeb2quYUj_g8U7vqW",
             from: {
@@ -16,7 +17,6 @@ function data() {
                 lng: -73.251883,
             },
             message: "El paramo",
-            status: "sent",
         };
 
         var matriz = ["data1", "data2", "data3"];

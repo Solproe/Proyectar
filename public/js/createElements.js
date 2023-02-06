@@ -1,18 +1,13 @@
-function createNewElement() {
-    alert("works");
-    const newElement = document.createElement("div");
-    newElement.classList.add("div");
-    newElement.textContent = "soy un div creado con javascript";
-    document.querySelector(".container").appendChild(newElement);
-    getAllRequests();
+function createNewElement(data, num) {
+    const tbody = document.getElementById("tbody");
+    tbody.innerHTML += '<tr><th scope="row">' + num + '</th><td>' + data.name + '</td><td>' + data.status + '</td></tr>';
 }
 
 function getAllRequests() {
+    var num = 1;
     var ws = new WebSocket("ws://trusting-cultured-ceratonykus.glitch.me");
     ws.onopen = function(evt) {
-        alert("abierta la conexion");
-
-        var matriz = [{name: "JPY956. MOVIL.11"}];
+        var matriz = ["JPY956. MOVIL.11", "EHN881 MOVIL.06"];
 
         ws.send(JSON.stringify(matriz));
     }
@@ -24,8 +19,10 @@ function getAllRequests() {
         alert("close");
     }
     ws.onmessage = function(evt) {
-        alert(evt.data);
+        var data = JSON.parse(evt.data);
+        createNewElement(data, num);
+        num += 1;
     }
 }
 
-window.addEventListener('load', createNewElement());
+window.addEventListener('load', getAllRequests());
