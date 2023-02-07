@@ -1,10 +1,20 @@
+var countNotification = 0;
+
 function createNewElement(data, num) {
     const tbody = document.getElementById("tbody");
-    tbody.innerHTML += '<tr><th scope="row">' + num + '</th><td id=' + data.name.slice(0, 6) + '>' + data.name + '</td><td>' + data.status + '</td></tr>';
+    tbody.innerHTML += '<tr><th scope="row">' + num + '</th><td>' + data.name + '</td><td id=' + data.name.slice(0, 6) + '>' + data.status + '</td></tr>';
 }
 
 function updateElement(data, id) {
-
+    if (data.status === 'accepted') {
+        id.innerHTML = '<td><span class="border bg-success border-5 rounded-pill">' + data.status + '</span></td>';
+    }
+    else if (data.status === 'sent') {
+        id.innerHTML = '<td><span class="border bg-warning rounded-pill">' + data.status + '</span></td>';
+    }
+    else if (data.status === 'rejected') {
+        id.innerHTML = '<td><span class="border bg-danger rounded-pill">' + data.status + '</span></td>';
+    }
 }
 
 function getAllRequests() {
@@ -12,28 +22,33 @@ function getAllRequests() {
     var ws = new WebSocket("ws://trusting-cultured-ceratonykus.glitch.me");
     ws.onopen = function (evt) {
         var matriz = ["JPY956. MOVIL.11", "EHN881 MOVIL.06"];
-
         ws.send(JSON.stringify(matriz));
     }
 
     ws.onerror = function (evt) {
-        alert("error de conexion " + evt);
+        
     }
     ws.onclose = function (evt) {
-        alert("close");
+        getAllRequests();
     }
     ws.onmessage = function (evt) {
-        var data = JSON.parse(evt.data);
-        var item = document.getElementById(data.name.slice(0, 6));
-        alert(item);
-        if (item === null) {
-            createNewElement(data, num);
-            num += 1;
+        try {
+            var data = JSON.parse(evt.data);
+            var id = document.getElementById(data.name.slice(0, 6));
+            if (id === null) {
+                createNewElement(data, num);
+                num += 1;
+            }
+            else {
+                updateElement(data, id);
+            }
         }
-        else {
+        catch (e) {
 
         }
     }
 }
+
+$('.notification-bell').append('<span class="badge badge-danger navbar-badge">3</span>');
 
 window.addEventListener('load', getAllRequests());

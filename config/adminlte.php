@@ -297,8 +297,16 @@ return [
             'topnav_right' => true,
         ],
         [
-            'type'         => 'fullscreen-widget',
+            'icon'         => 'notification-bell fas fa-bell',
+            'text'         => '',
+            'url'          => '#',
             'topnav_right' => true,
+            'submenu'      => [
+                [
+                    'text'  => 'data',
+                    'url'   => '#',
+                ]
+            ],
         ],
 
         // Sidebar items:
