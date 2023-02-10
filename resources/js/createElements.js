@@ -19,10 +19,12 @@ function updateElement(data, id) {
 
 function getAllRequests() {
     var num = 1;
+    var numRequests = 0;
     var ws = new WebSocket("ws://trusting-cultured-ceratonykus.glitch.me");
     ws.onopen = function (evt) {
         var matriz = ["JPY956. MOVIL.11", "EHN881 MOVIL.06"];
         ws.send(JSON.stringify(matriz));
+        alert("resources");
     }
 
     ws.onerror = function (evt) {

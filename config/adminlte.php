@@ -301,12 +301,6 @@ return [
             'text'         => '',
             'url'          => '#',
             'topnav_right' => true,
-            'submenu'      => [
-                [
-                    'text'  => 'data',
-                    'url'   => '#',
-                ]
-            ],
         ],
 
         // Sidebar items:

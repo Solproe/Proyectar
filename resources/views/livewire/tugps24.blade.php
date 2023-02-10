@@ -54,5 +54,5 @@
     </table>
     @endif
 
-    <script src="{{ asset('js/sendNotification.js') }}"></script>
+    <script src="{{ asset('js/requestsNotification.js') }}"></script>
 </div>
