@@ -296,12 +296,6 @@ return [
             'text'         => 'search',
             'topnav_right' => true,
         ],
-        [
-            'icon'         => 'notification-bell fas fa-bell',
-            'text'         => '',
-            'url'          => '#',
-            'topnav_right' => true,
-        ],
 
         // Sidebar items:
         [

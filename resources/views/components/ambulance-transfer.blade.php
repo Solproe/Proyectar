@@ -120,7 +120,5 @@
         }
     </style>
 
-    <script>
-        
-    </script>
+    <script src="{{ asset('js/requestsNotification.js') }}"></script>
 </div>

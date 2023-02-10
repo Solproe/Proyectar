@@ -13,6 +13,14 @@
                     Search
                 </button>
             </div>
+            <div class="nav-item dropdown">
+                <a class="nav-link" data-toggle="dropdown" href="#" id="icon-notification">
+                    <i class="far fa-bell"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" id="list-requests">
+                    <span class="dropdown-header" id="header-notifications">0 Notifications</span>
+                </div>
+            </div>
         </div>
     </header>
     @if($matriz != null and $typetransfer == "traslado")
