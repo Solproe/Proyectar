@@ -25,6 +25,8 @@ class Tugps24 extends Component
 
     public function render()
     {
+        $database = app('firebase.database');
+        
         $reponse = new tugps24API();
 
         $this->data = $reponse->getDataFromAPI();

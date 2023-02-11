@@ -3,15 +3,17 @@
     <header>
         <div class="row" style="padding: 20px 10px 20px 10px;">
             <div class="col">
-                <label>Address</label>
-                <input type="text" wire:model="address">
-                <select wire:model="typetransfer" style="margin-left: 4%;">
-                    <option value="emergencia">Emergencia</option>
-                    <option value="traslado">Traslado</option>
-                </select>
-                <button wire:click="distance()" type="submit" onclick="send();" class="btn btn-outline-success" style="margin-left: 4%;">
-                    Search
-                </button>
+                <form action="" method="post">
+                    <label>Address</label>
+                    <input type="text" name="address">
+                    <select name="typetransfer" style="margin-left: 4%;">
+                        <option value="emergencia">Emergencia</option>
+                        <option value="traslado">Traslado</option>
+                    </select>
+                    <button type="submit" onclick="send();" class="btn btn-outline-success" style="margin-left: 4%;">
+                        Search
+                    </button>
+                </form>
             </div>
             <div class="nav-item dropdown">
                 <a class="nav-link" data-toggle="dropdown" href="#" id="icon-notification">

@@ -16,4 +16,19 @@ class AmbulanceControl extends Controller
     {
         return view('ambulances.status');
     }
+
+    public function create(Request $request)
+    {
+
+    }
+
+    public function update(Request $request, $id)
+    {
+
+    }
+
+    public function destroy($id)
+    {
+
+    }
 }
