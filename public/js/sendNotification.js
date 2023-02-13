@@ -1,37 +1,37 @@
-function data() {
-
+function transfer(plate, device, from, to) {
+    var fromGeo = (Array), from;
     var ws = new WebSocket("ws://trusting-cultured-ceratonykus.glitch.me");
-    ws.onopen = function(evt) {
-        alert("abierta la conexion");
+    ws.onopen = function (evt) {
+        var patientName = document.getElementById('patientName').innerHTML;
+        var documentType = document.getElementById('documentType').innerHTML;
+        var fate = document.getElementById('fate').innerHTML;
+        var identification = document.getElementById('identification').innerHTML;
+        var companions = document.getElementById('check').innerHTML;
+        var birthday = document.getElementById('birthday').innerHTML;
+        var transferDate = document.getElementById('transferDate').innerHTML;
+        var diagnosis = document.getElementById('diagnosis').innerHTML;
+        var transferTime = document.getElementById('transferTime').innerHTML;
+
         var data = {
-            type: "transfer",
-            status: "sent",
-            name: "JPY956. MOVIL.11",
-            device: "fD2QDILlRB6KzSGIUClE8h:APA91bGzIA3iuPr_Gt3KpeX3Bpu9YJ3FWvActkWpBNcK4a1_3f8rawMPpGUJrw-OLOeJPHJMBB-VPY6IRtsF7fwzu5rl8HwUbVHrCKvWDGQ6xNhGTpux62AYGkFyeb2quYUj_g8U7vqW",
-            from: {
-                lat: 10.445672,
-                lng: -73.238404,
+            type: 'transfer',
+            plate: plate,
+            data: {
+                patientName: patientName,
+                documentTYpe: documentType,
+                identification: identification,
+                companions: companions,
+                birthday: birthday,
+                diagnosis: diagnosis,
             },
-            to: {
-                lat: 10.432587,
-                lng: -73.251883,
+            from:{
+                lat: fromGeo[0],
+                lng: fromGeo[1],
             },
-            message: "El paramo",
+            device: device,
+            message: address,
+            time: transferTime,
+            date: transferDate,
         };
-
-        var matriz = ["data1", "data2", "data3"];
-
         ws.send(JSON.stringify(data));
     }
-    ws.onerror = function(evt) {
-        alert("error de conexion " + evt);
-    }
-    ws.onclose = function(evt) {
-        alert("close");
-    }
-    ws.onmessage = function(evt) {
-        alert(evt.data);
-    }
 }
-
-window.addEventListener('load', data());

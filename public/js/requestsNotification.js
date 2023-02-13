@@ -86,4 +86,8 @@ function getAllRequests() {
     }
 }
 
+function sendNotification() {
+    alert("bb");
+}
+
 window.addEventListener('load', getAllRequests());

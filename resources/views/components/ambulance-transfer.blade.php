@@ -13,7 +13,7 @@
                 <label>Origin:</label>
             </div>
             <div class="col">
-                <input type="text">
+                <input type="text" placeholder="{{$origin}}" disabled>
             </div>
         </div>
     </div>
@@ -111,7 +111,7 @@
             </div>
         </div>
         <div class="col" style="left: 10%;">
-            <button class="btn btn-outline-primary" type="submit" id="send">Ask</button>
+            <button onclick="name()" class="btn btn-outline-primary" type="submit" id="send">Ask</button>
         </div>
     </div>
     <style>
@@ -119,6 +119,4 @@
             margin: 1.5%;
         }
     </style>
-
-    <script src="{{ asset('js/requestsNotification.js') }}"></script>
 </div>

@@ -23,10 +23,14 @@ class Tugps24 extends Component
 
     public $typetransfer;
 
+    public $fate;
+
+    public $fateGeo;
+
+    public $originGeo;
+
     public function render()
     {
-        $database = app('firebase.database');
-        
         $reponse = new tugps24API();
 
         $this->data = $reponse->getDataFromAPI();
@@ -49,24 +53,30 @@ class Tugps24 extends Component
         $min = array();
 
         foreach ($this->data as $key => $data) {
-            
+
             $distance = $validateDistance->getDistance([$data['Latitud'], $data['Longitud']], [$response[0], $response[1]]);
 
             $this->matriz[] = ['Plate' => $data['Plate'], 'Distance' => $distance];
 
-            $min [] = $distance;
+            $min[] = $distance;
         }
 
         $data = null;
 
-        foreach ($this->matriz as $data)
-        {
-            if ($data['Distance'] == min($min)){
+        foreach ($this->matriz as $data) {
+            if ($data['Distance'] == min($min)) {
 
                 $this->min = $data;
 
                 break;
             }
         }
+    }
+
+    public function updatedfate()
+    {
+        $geoCodingGoogleAPI = new geocodingGoogleAPI();
+        $this->fateGeo = $geoCodingGoogleAPI->getAddressGeocoding($this->fate);
+        $this->originGeo = $geoCodingGoogleAPI->getAddressGeocoding($this->address);
     }
 }

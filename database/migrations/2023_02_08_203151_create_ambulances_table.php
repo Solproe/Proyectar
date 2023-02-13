@@ -17,7 +17,9 @@ return new class extends Migration
         Schema::create('ambulances', function (Blueprint $table) {
             $table->id();
             $table->string('plate')->unique();
+            $table->string('type');
             $table->string('status');
+            $table->string('device_token');
             $table->timestamps();
         });
     }

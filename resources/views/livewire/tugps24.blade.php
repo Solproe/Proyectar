@@ -3,17 +3,15 @@
     <header>
         <div class="row" style="padding: 20px 10px 20px 10px;">
             <div class="col">
-                <form action="" method="post">
-                    <label>Address</label>
-                    <input type="text" name="address">
-                    <select name="typetransfer" style="margin-left: 4%;">
-                        <option value="emergencia">Emergencia</option>
-                        <option value="traslado">Traslado</option>
-                    </select>
-                    <button type="submit" onclick="send();" class="btn btn-outline-success" style="margin-left: 4%;">
-                        Search
-                    </button>
-                </form>
+                <label>Address</label>
+                <input type="text" wire:model="address">
+                <select wire:model="typetransfer" style="margin-left: 4%;">
+                    <option value="emergencia">Emergencia</option>
+                    <option value="traslado">Traslado</option>
+                </select>
+                <button wire:click="distance()" class="btn btn-outline-success" style="margin-left: 4%;">
+                    Search
+                </button>
             </div>
             <div class="nav-item dropdown">
                 <a class="nav-link" data-toggle="dropdown" href="#" id="icon-notification">
@@ -26,7 +24,133 @@
         </div>
     </header>
     @if($matriz != null and $typetransfer == "traslado")
-    <x-ambulance-transfer ambulance="{{$min['Plate']}}"></x-ambulance-transfer>
+    <div>
+        <div class="row">
+            <div class="col">
+                <div class="col">
+                    <label>Patient Name:</label>
+                </div>
+                <div class="col">
+                    <input type="text" id="patientName">
+                </div>
+            </div>
+            <div class="col">
+                <div class="col">
+                    <label>Origin:</label>
+                </div>
+                <div class="col">
+                    <input type="text" placeholder="{{$address}}" disabled>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="col">
+                    <label><i class="text-danger">*</i>Document type:</label>
+                </div>
+                <div class="col" id="documentType">
+                    <select>
+                        <option value="">Document Type</option>
+                        <option value="CC">CC - CITIZENSHIP CARD</option>
+                        <option value="CE">CE - FOREIGNER ID</option>
+                        <option value="PA">PA - PASSPORT</option>
+                        <option value="NUIP">NUIP - UNIQUE PERSONAL IDENTIFICATION NUMBER</option>
+                        <option value="PE">PE - SPECIAL RESIDENCE PERMIT</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col">
+                <div class="col">
+                    <label>Fate:</label>
+                </div>
+                <div>
+                    <input type="text" id="fate" wire:model="fate">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="col">
+                    <label>Identification:</label>
+                </div>
+                <div class="col">
+                    <input type="text" placeholder="Enter identification" id="identification">
+                </div>
+            </div>
+            <div class="col">
+                <div class="col">
+                    <label>Companions:</label>
+                </div>
+                <div class="col">
+                    <div class="btn-group" role="group" aria-label="Basic radio toggle button group" id="check">
+                        <input type="radio" class="btn-check" value="yes" name="btnradio" autocomplete="off" checked>
+                        <label class="btn btn-outline-primary" for="btnradio1">Yes</label>
+                        <input type="radio" class="btn-check" value="not" name="btnradio" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="btnradio2">Not</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="col">
+                    <label>Birthday:</label>
+                </div>
+                <div class="col">
+                    <input type="date" id="birthday" name="trip-start" value="2018-07-22">
+                </div>
+            </div>
+            <div class="col">
+                <div class="col">
+                    <label>Transfer Date:</label>
+                </div>
+                <div class="col">
+                    <input type="date" id="transferDate" name="trip-start" value="2018-07-22">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="col">
+                    <label>Diagnosis:</label>
+                    <div>
+                        <textarea name="" id="diagnosis" cols="30" rows="5"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="col">
+                    <label>Transfer Time:</label>
+                </div>
+                <div class="col">
+                    <input type="time" id="transferTime">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 border border-success rounded">
+                <div class="col">
+                    <label>Nearest Ambulance: </label>
+                </div>
+                <div class="col">
+                    {{$min['Plate']}}
+                </div>
+            </div>
+            <div class="col" style="left: 10%;">
+                <button class="btn btn-outline-primary" type="submit" id="sendTransfer">Ask</button>
+            </div>
+        </div>
+        <style>
+            .row {
+                margin: 1.5%;
+            }
+        </style>
+        <script>
+            var button = document.getElementById('sendTransfer');
+            var device = 'fD2QDILlRB6KzSGIUClE8h:APA91bGzIA3iuPr_Gt3KpeX3Bpu9YJ3FWvActkWpBNcK4a1_3f8rawMPpGUJrw-OLOeJPHJMBB-VPY6IRtsF7fwzu5rl8HwUbVHrCKvWDGQ6xNhGTpux62AYGkFyeb2quYUj_g8U7vqW';
+            button.onclick = transfer($min['Plate'], device, $fateGeo);
+        </script>
+    </div>
     @endif
     <table class="table">
         <thead>
@@ -65,4 +189,9 @@
     @endif
 
     <script src="{{ asset('js/requestsNotification.js') }}"></script>
+    <script src="{{ asset('js/sendNotification.js') }}"></script>
+
+    <script>
+
+    </script>
 </div>

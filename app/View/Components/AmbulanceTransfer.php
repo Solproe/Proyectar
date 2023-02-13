@@ -8,14 +8,19 @@ class AmbulanceTransfer extends Component
 {
 
     public $ambulance;
+
+    public $origin;
+    
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($ambulance)
+    public function __construct($ambulance, $origin)
     {
         $this->ambulance = $ambulance;
+
+        $this->origin = $origin;
     }
 
     /**

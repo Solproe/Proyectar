@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('status');
             $table->string('type');
             $table->json('details');
-            $table->timestamps();
+            $table->dateTime('started');
+            $table->dateTime('finished');
         });
     }
 
