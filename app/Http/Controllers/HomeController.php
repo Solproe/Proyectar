@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\RolesAndPermissions\Role;
 
 class HomeController extends Controller
 {

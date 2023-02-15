@@ -23,13 +23,10 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/password', function () {
     return view('dashboard');
 })->name('password');
 
-Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Auth::routes();
 
-Route::get('ambulance', [AmbulanceControl::class, 'index'])->name('ambulance.index');
-Route::get('status', [AmbulanceControl::class, 'status'])->name('ambulance.status');
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Data;
+namespace App\Models\Ambulances;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -11,4 +11,11 @@ class Ambulances extends Model
 
     protected $table = "ambulances";
 
+    protected $fillable = [
+        'id',
+        'plate',
+        'type',
+        'status',
+        'device_token'
+    ];
 }

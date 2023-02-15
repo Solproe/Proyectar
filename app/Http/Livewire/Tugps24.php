@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Http\Controllers\APIs\tugps24API;
 use App\Models\APIs\geocodingGoogleAPI;
+use App\Models\Ambulances\Ambulances;
 use App\Models\Data\validateDistance;
 use Livewire\Component;
 
@@ -56,7 +57,7 @@ class Tugps24 extends Component
 
             $distance = $validateDistance->getDistance([$data['Latitud'], $data['Longitud']], [$response[0], $response[1]]);
 
-            $this->matriz[] = ['Plate' => $data['Plate'], 'Distance' => $distance];
+            $this->matriz[] = ['Plate' => $data['Plate'], 'Distance' => $distance, 'From' => $response];
 
             $min[] = $distance;
         }
@@ -65,9 +66,7 @@ class Tugps24 extends Component
 
         foreach ($this->matriz as $data) {
             if ($data['Distance'] == min($min)) {
-
                 $this->min = $data;
-
                 break;
             }
         }

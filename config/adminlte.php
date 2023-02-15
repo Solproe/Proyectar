@@ -365,19 +365,19 @@ return [
         ],
         ['header' => 'labels'],
         [
-            'text'       => 'important',
+            'text'       => 'create',
             'icon_color' => 'red',
             'url'        => '#',
         ],
         [
             'text'       => 'Status',
             'icon_color' => 'yellow',
-            'route'        => 'ambulance.status',
+            'route'        => 'requests.index',
         ],
         [
             'text'       => 'Ambulances',
             'icon_color' => 'cyan',
-            'route'        => 'ambulance.index',
+            'route'        => 'ambulances.index',
         ],
     ],
 

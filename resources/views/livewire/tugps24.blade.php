@@ -4,7 +4,7 @@
         <div class="row" style="padding: 20px 10px 20px 10px;">
             <div class="col">
                 <label>Address</label>
-                <input type="text" wire:model="address">
+                <input type="text" wire:model="address" autocomplete="TRUE">
                 <select wire:model="typetransfer" style="margin-left: 4%;">
                     <option value="emergencia">Emergencia</option>
                     <option value="traslado">Traslado</option>
@@ -137,7 +137,7 @@
                 </div>
             </div>
             <div class="col" style="left: 10%;">
-                <button class="btn btn-outline-primary" type="submit" id="sendTransfer">Ask</button>
+                <button class="btn btn-outline-primary" id="sendTransfer">Ask</button>
             </div>
         </div>
         <style>
@@ -146,9 +146,12 @@
             }
         </style>
         <script>
-            var button = document.getElementById('sendTransfer');
-            var device = 'fD2QDILlRB6KzSGIUClE8h:APA91bGzIA3iuPr_Gt3KpeX3Bpu9YJ3FWvActkWpBNcK4a1_3f8rawMPpGUJrw-OLOeJPHJMBB-VPY6IRtsF7fwzu5rl8HwUbVHrCKvWDGQ6xNhGTpux62AYGkFyeb2quYUj_g8U7vqW';
-            button.onclick = transfer($min['Plate'], device, $fateGeo);
+            var button = document.getElementById("sendTransfer");
+            button.addEventListener("click", function() {
+                var plate = "{{ $min['Plate'] }}";
+                alert("{{ $originGeo[0] }}");
+                var device = 'fD2QDILlRB6KzSGIUClE8h:APA91bGzIA3iuPr_Gt3KpeX3Bpu9YJ3FWvActkWpBNcK4a1_3f8rawMPpGUJrw-OLOeJPHJMBB-VPY6IRtsF7fwzu5rl8HwUbVHrCKvWDGQ6xNhGTpux62AYGkFyeb2quYUj_g8U7vqW';
+            });
         </script>
     </div>
     @endif
@@ -158,6 +161,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Plate</th>
                 <th scope="col">Address</th>
+                <th scope="col">Status</th>
                 <th scope="col">Distance / Km</th>
             </tr>
         </thead>
@@ -170,6 +174,7 @@
                 <th scope="row">{{$num}}</th>
                 <td>{{$device['Plate']}}</td>
                 <td>{{$device['Address']}}</td>
+                <td>Status...</td>
                 @if($matriz == null)
                 <td align="center">{{$device['Distance']}}</td>
                 @else
@@ -190,8 +195,4 @@
 
     <script src="{{ asset('js/requestsNotification.js') }}"></script>
     <script src="{{ asset('js/sendNotification.js') }}"></script>
-
-    <script>
-
-    </script>
 </div>

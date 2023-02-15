@@ -1,5 +1,4 @@
-var countNotification = 0;
-
+let message = "how are you?";
 function createNewElement(data, num) {
     const tbody = document.getElementById("tbody");
     tbody.innerHTML += '<tr><th scope="row">' + num + '</th><td>' + data.name + '</td><td id=' + data.name.slice(0, 6) + '>' + data.status + '</td></tr>';

@@ -1,16 +1,16 @@
+
 function transfer(plate, device, from, to) {
-    var fromGeo = (Array), from;
     var ws = new WebSocket("ws://trusting-cultured-ceratonykus.glitch.me");
     ws.onopen = function (evt) {
-        var patientName = document.getElementById('patientName').innerHTML;
-        var documentType = document.getElementById('documentType').innerHTML;
-        var fate = document.getElementById('fate').innerHTML;
-        var identification = document.getElementById('identification').innerHTML;
-        var companions = document.getElementById('check').innerHTML;
-        var birthday = document.getElementById('birthday').innerHTML;
-        var transferDate = document.getElementById('transferDate').innerHTML;
-        var diagnosis = document.getElementById('diagnosis').innerHTML;
-        var transferTime = document.getElementById('transferTime').innerHTML;
+        var patientName = document.getElementById('patientName').value;
+        var documentType = document.getElementById('documentType').value;
+        var fate = document.getElementById('fate').value;
+        var identification = document.getElementById('identification').value;
+        var companions = document.getElementById('check').value;
+        var birthday = document.getElementById('birthday').value;
+        var transferDate = document.getElementById('transferDate').value;
+        var diagnosis = document.getElementById('diagnosis').value;
+        var transferTime = document.getElementById('transferTime').value;
 
         var data = {
             type: 'transfer',
@@ -24,8 +24,12 @@ function transfer(plate, device, from, to) {
                 diagnosis: diagnosis,
             },
             from:{
-                lat: fromGeo[0],
-                lng: fromGeo[1],
+                lat: from[0],
+                lng: from[1],
+            },
+            to: {
+                lat: to[0],
+                lng: to[1],
             },
             device: device,
             message: address,
