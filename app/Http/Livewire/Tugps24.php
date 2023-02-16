@@ -72,7 +72,7 @@ class Tugps24 extends Component
         }
     }
 
-    public function updatedfate()
+    public function validatefate()
     {
         $geoCodingGoogleAPI = new geocodingGoogleAPI();
         $this->fateGeo = $geoCodingGoogleAPI->getAddressGeocoding($this->fate);

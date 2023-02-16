@@ -63,8 +63,15 @@
                 <div class="col">
                     <label>Fate:</label>
                 </div>
-                <div>
+                <div class="col">
                     <input type="text" id="fate" wire:model="fate">
+                </div>
+                <div class="col">
+                    <span>
+                        <button wire:click="validatefate" class="btn btn-outline-info" id="validateButton">
+                            Validate
+                        </button>
+                    </span>
                 </div>
             </div>
         </div>
@@ -141,6 +148,9 @@
             </div>
         </div>
         <style>
+            #validateButton {
+                margin-top: 3%;
+            }
             .row {
                 margin: 1.5%;
             }
@@ -149,8 +159,11 @@
             var button = document.getElementById("sendTransfer");
             button.addEventListener("click", function() {
                 var plate = "{{ $min['Plate'] }}";
-                alert("{{ $originGeo[0] }}");
-                var device = 'fD2QDILlRB6KzSGIUClE8h:APA91bGzIA3iuPr_Gt3KpeX3Bpu9YJ3FWvActkWpBNcK4a1_3f8rawMPpGUJrw-OLOeJPHJMBB-VPY6IRtsF7fwzu5rl8HwUbVHrCKvWDGQ6xNhGTpux62AYGkFyeb2quYUj_g8U7vqW';
+                var origin = JSON(toString("{{ $originGeo }}"));
+                var fate = JSON(toString(" {{ $fateGeo }}"));
+                if (origin.lat != null && origin.lat != undefined) {
+                    var device = 'fD2QDILlRB6KzSGIUClE8h:APA91bGzIA3iuPr_Gt3KpeX3Bpu9YJ3FWvActkWpBNcK4a1_3f8rawMPpGUJrw-OLOeJPHJMBB-VPY6IRtsF7fwzu5rl8HwUbVHrCKvWDGQ6xNhGTpux62AYGkFyeb2quYUj_g8U7vqW';
+                }
             });
         </script>
     </div>
