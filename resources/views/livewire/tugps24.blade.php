@@ -151,6 +151,7 @@
             #validateButton {
                 margin-top: 3%;
             }
+
             .row {
                 margin: 1.5%;
             }
@@ -159,11 +160,13 @@
             var button = document.getElementById("sendTransfer");
             button.addEventListener("click", function() {
                 var plate = "{{ $min['Plate'] }}";
-                var origin = JSON(toString("{{ $originGeo }}"));
-                var fate = JSON(toString(" {{ $fateGeo }}"));
-                if (origin.lat != null && origin.lat != undefined) {
-                    var device = 'fD2QDILlRB6KzSGIUClE8h:APA91bGzIA3iuPr_Gt3KpeX3Bpu9YJ3FWvActkWpBNcK4a1_3f8rawMPpGUJrw-OLOeJPHJMBB-VPY6IRtsF7fwzu5rl8HwUbVHrCKvWDGQ6xNhGTpux62AYGkFyeb2quYUj_g8U7vqW';
+                if ("{{ $originGeo[0] }}") {
+                    alert("data");
                 }
+                else {
+                    alert("no data");
+                }
+                var device = 'fD2QDILlRB6KzSGIUClE8h:APA91bGzIA3iuPr_Gt3KpeX3Bpu9YJ3FWvActkWpBNcK4a1_3f8rawMPpGUJrw-OLOeJPHJMBB-VPY6IRtsF7fwzu5rl8HwUbVHrCKvWDGQ6xNhGTpux62AYGkFyeb2quYUj_g8U7vqW';
             });
         </script>
     </div>
