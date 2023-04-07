@@ -1,6 +1,6 @@
 function addRequests(data, num) {
     
-    var name = data.name.slice(0, 6);
+    var name = data.plate.slice(0, 6);
 
     var id = name + "-status";
 
@@ -35,7 +35,7 @@ function addRequests(data, num) {
 
 function updateRequests(data) {
 
-    var name = data.name.slice(0, 6);
+    var name = data.plate.slice(0, 6);
 
     var id = "#" + name + "-status";
 
@@ -58,8 +58,10 @@ function getAllRequests() {
     var num = 0;
     var ws = new WebSocket("ws://trusting-cultured-ceratonykus.glitch.me");
     ws.onopen = function (evt) {
-        var matriz = ["JPY956. MOVIL.11", "EHN881 MOVIL.06"];
-        ws.send(JSON.stringify(matriz));
+        var req = {
+            type: 'getstate',
+        };
+        ws.send(JSON.stringify(req));
     }
 
     ws.onerror = function (evt) {
@@ -71,12 +73,16 @@ function getAllRequests() {
     ws.onmessage = function (evt) {
         try {
             var data = JSON.parse(evt.data);
-            var id = document.getElementById(data.name.slice(0, 6));
+            if (data.plate !== undefined)
+            {
+                var id = document.getElementById(data.plate.slice(0, 6));
+            }
+            
             if (id === null) {
                 num += 1;
                 addRequests(data, num);
             }
-            else {
+            else if (id !== null){
                 updateRequests(data);
             }
         }
@@ -84,10 +90,6 @@ function getAllRequests() {
 
         }
     }
-}
-
-function sendNotification() {
-    alert("bb");
 }
 
 window.addEventListener('load', getAllRequests());

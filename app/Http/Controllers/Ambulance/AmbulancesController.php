@@ -43,6 +43,15 @@ class AmbulancesController extends Controller
             'status' => 'required',
             'device_token' => 'required|unique:ambulances',
         ]);
+
+        $ambulances = new Ambulances();
+        $ambulances->fill($request->all());
+        if ($ambulances->save()) {
+            return redirect()->route('admin.ambulances.index');
+        }
+        else {
+            return redirect()->route('admin.ambulances.create');
+        }
     }
 
     /**

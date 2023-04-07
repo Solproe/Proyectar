@@ -1,5 +1,5 @@
 @extends('adminlte::page')
 
 @section('content')
-    @livewire('ambulances-ambulances-create');
+    @livewire('ambulances.ambulance-create')
 @stop

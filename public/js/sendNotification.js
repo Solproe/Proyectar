@@ -1,5 +1,4 @@
-
-function transfer(plate, device, from, to) {
+function transfer(plate, device, fromLat, fromLng, toLat, toLng, address) {
     var ws = new WebSocket("ws://trusting-cultured-ceratonykus.glitch.me");
     ws.onopen = function (evt) {
         var patientName = document.getElementById('patientName').value;
@@ -12,29 +11,32 @@ function transfer(plate, device, from, to) {
         var diagnosis = document.getElementById('diagnosis').value;
         var transferTime = document.getElementById('transferTime').value;
 
+        alert(documentType);
+
         var data = {
             type: 'transfer',
             plate: plate,
-            data: {
+            patient: {
                 patientName: patientName,
-                documentTYpe: documentType,
+                documentType: documentType,
                 identification: identification,
                 companions: companions,
                 birthday: birthday,
                 diagnosis: diagnosis,
             },
             from:{
-                lat: from[0],
-                lng: from[1],
+                lat: fromLat,
+                lng: fromLng,
             },
             to: {
-                lat: to[0],
-                lng: to[1],
+                lat: toLat,
+                lng: toLng,
             },
-            device: device,
+            token: device,
             message: address,
             time: transferTime,
             date: transferDate,
+            status: 'sent',
         };
         ws.send(JSON.stringify(data));
     }

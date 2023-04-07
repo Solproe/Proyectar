@@ -367,7 +367,7 @@ return [
         [
             'text'       => 'create',
             'icon_color' => 'red',
-            'url'        => '#',
+            'route'        => 'admin.ambulances.create',
         ],
         [
             'text'       => 'Status',
@@ -377,7 +377,7 @@ return [
         [
             'text'       => 'Ambulances',
             'icon_color' => 'cyan',
-            'route'        => 'ambulances.index',
+            'route'        => 'admin.ambulances.index',
         ],
     ],
 

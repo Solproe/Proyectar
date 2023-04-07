@@ -48,8 +48,8 @@
                 <div class="col">
                     <label><i class="text-danger">*</i>Document type:</label>
                 </div>
-                <div class="col" id="documentType">
-                    <select>
+                <div class="col">
+                    <select id="documentType">
                         <option value="">Document Type</option>
                         <option value="CC">CC - CITIZENSHIP CARD</option>
                         <option value="CE">CE - FOREIGNER ID</option>
@@ -89,12 +89,11 @@
                     <label>Companions:</label>
                 </div>
                 <div class="col">
-                    <div class="btn-group" role="group" aria-label="Basic radio toggle button group" id="check">
-                        <input type="radio" class="btn-check" value="yes" name="btnradio" autocomplete="off" checked>
-                        <label class="btn btn-outline-primary" for="btnradio1">Yes</label>
-                        <input type="radio" class="btn-check" value="not" name="btnradio" autocomplete="off">
-                        <label class="btn btn-outline-primary" for="btnradio2">Not</label>
-                    </div>
+                    <select class="form-select" id="check">
+                        <option selected>select</option>
+                        <option value="yes">Yes</option>
+                        <option value="not">Not</option>
+                    </select>
                 </div>
             </div>
         </div>
@@ -156,19 +155,20 @@
                 margin: 1.5%;
             }
         </style>
+        @if (isset($originGeo[0]))
         <script>
             var button = document.getElementById("sendTransfer");
             button.addEventListener("click", function() {
                 var plate = "{{ $min['Plate'] }}";
-                if ("{{ $originGeo[0] }}") {
-                    alert("data");
-                }
-                else {
-                    alert("no data");
-                }
+                var fromLat = "{{ $originGeo[0] }}";
+                var fromLng = "{{ $originGeo[1] }}";
+                var toLat = "{{ $fateGeo[0] }}";
+                var toLng = "{{ $fateGeo[1] }}";
                 var device = 'fD2QDILlRB6KzSGIUClE8h:APA91bGzIA3iuPr_Gt3KpeX3Bpu9YJ3FWvActkWpBNcK4a1_3f8rawMPpGUJrw-OLOeJPHJMBB-VPY6IRtsF7fwzu5rl8HwUbVHrCKvWDGQ6xNhGTpux62AYGkFyeb2quYUj_g8U7vqW';
+                transfer(plate, device, fromLat, fromLng, toLat, toLng, "{{$address}}");
             });
         </script>
+        @endif
     </div>
     @endif
     <table class="table">
