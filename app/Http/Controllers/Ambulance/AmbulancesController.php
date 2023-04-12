@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Ambulance;
 
 use App\Http\Controllers\Controller;
 use App\Models\Ambulances\Ambulances;
+use App\Models\Status\status;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -16,7 +17,9 @@ class AmbulancesController extends Controller
      */
     public function index()
     {
-        return view('ambulances.index');
+        $ambulances = Ambulances::all();
+
+        return view('ambulances.index', compact('ambulances'));
     }
 
     /**
@@ -26,7 +29,9 @@ class AmbulancesController extends Controller
      */
     public function create()
     {
-        return view('ambulances.create');
+        $status = status::orderBy('id')->pluck('name', 'id');
+
+        return view('ambulances.create', compact('status'));
     }
 
     /**
@@ -43,6 +48,8 @@ class AmbulancesController extends Controller
             'status' => 'required',
             'device_token' => 'required|unique:ambulances',
         ]);
+
+        
 
         $ambulances = new Ambulances();
         $ambulances->fill($request->all());
@@ -73,7 +80,11 @@ class AmbulancesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $ambulance = Ambulances::where('id', $id)->first();
+
+        $status = status::orderBy('id')->pluck('name', 'id');
+
+        return view('ambulances.create', compact('status', 'ambulance'));
     }
 
     /**
@@ -85,7 +96,21 @@ class AmbulancesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $ambulance = Ambulances::where('id', $id)->first();
+
+        $ambulance->plate = $request->plate;
+
+        $ambulance->type = $request->type;
+
+        $ambulance->plate = $request->plate;
+
+        $ambulance->status = $request->status;
+
+        $ambulance->device_token = $request->device_token;
+
+        $ambulance->save();
+
+        return redirect()->route('admin.ambulances.index');
     }
 
     /**

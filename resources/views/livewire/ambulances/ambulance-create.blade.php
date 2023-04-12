@@ -30,7 +30,7 @@
                 ]) !!}
             </div>
             <div class="col align-self-end">
-                {!! form::submit('Roles Create', ['class' => 'btn btn-outline-success mb-4 mr-4 align-self-end float-right']) !!}
+                {!! form::submit('Ambulances Create', ['class' => 'btn btn-outline-success mb-4 mr-4 align-self-end float-right']) !!}
             </div>
         </div>
     {!! form::close() !!}
