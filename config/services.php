@@ -31,4 +31,9 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'tugps24' => [
+        'token' => env('TOKEN_TUGPS24'),
+        'url'   => env('URL_API_TUGPS24'),
+    ],
+
 ];

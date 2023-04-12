@@ -9,7 +9,7 @@ class geocodingGoogleAPI
 {
     use HasFactory;
 
-    public $API_TOKEN = 'AIzaSyA1APsLdkwFAPDXCR3TCLu-ZKITLuftxlo';
+    public $API_TOKEN = 'AIzaSyAnqddMw77Up_4n-e4JPRx-eLgb-QvzNuw';
 
     public function getAddressGeocoding($address)
     {
@@ -36,6 +36,8 @@ class geocodingGoogleAPI
         $geo = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?latlng='.urlencode($geolocalization).'&key='.urlencode($this->API_TOKEN));
 
         $geo = json_decode($geo, true);
+
+        
 
         return $geo['results'][0]['formatted_address'];
     }
