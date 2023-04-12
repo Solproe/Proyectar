@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Status;
 
 use App\Http\Controllers\Controller;
+use App\Models\Status\status;
 use Illuminate\Http\Request;
 
 class StatusController extends Controller
@@ -14,7 +15,9 @@ class StatusController extends Controller
      */
     public function index()
     {
-        //
+        $status = status::all();
+
+        return view('status.index', compact('status'));
     }
 
     /**
@@ -24,7 +27,7 @@ class StatusController extends Controller
      */
     public function create()
     {
-        //
+        return view('status.create');
     }
 
     /**
@@ -35,7 +38,11 @@ class StatusController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $status = new status();
+        $status->name = $request->status;
+        $status->save();
+
+        return redirect()->route('admin.status.index');
     }
 
     /**
@@ -57,7 +64,9 @@ class StatusController extends Controller
      */
     public function edit($id)
     {
-        //
+        $status = status::where('id', $id)->first();
+
+        return view('status.edit', compact('status'));
     }
 
     /**
@@ -69,7 +78,11 @@ class StatusController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $status = status::where('id', $id)->first();
+        $status->name = $request->status;
+        $status->save();
+
+        return redirect()->route('admin.status.index');
     }
 
     /**
@@ -80,6 +93,8 @@ class StatusController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $status = status::where('id', $id)->first()->delete();
+
+        return redirect()->route('admin.status.index');
     }
 }

@@ -16,7 +16,7 @@ return [
 
     'title' => 'PROYECTAR',
     'title_prefix' => '',
-    'title_postfix' => '',
+    'title_postfix' => '|',
 
     /*
     |--------------------------------------------------------------------------
@@ -325,50 +325,44 @@ return [
             'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-lock',
         ],
+        //Global Settings
         [
-            'text'    => 'multilevel',
+            'text'    => 'Settings',
             'icon'    => 'fas fa-fw fa-share',
             'submenu' => [
+                //Global Status
                 [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-                [
-                    'text'    => 'level_one',
-                    'url'     => '#',
+                    'text'    => 'Status',
                     'submenu' => [
                         [
-                            'text' => 'level_two',
-                            'url'  => '#',
+                            'text' => 'Index',
+                            'route'  => 'admin.status.index'
                         ],
                         [
-                            'text'    => 'level_two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                            ],
+                            'text'    => 'Create',
+                            'route'     => 'admin.status.create',
                         ],
                     ],
+                
                 ],
+                //Global Ambulances
                 [
-                    'text' => 'level_one',
-                    'url'  => '#',
+                    'text' => 'Ambulances',
+                    'submenu'  =>  [
+                        [
+                            'text'       => 'index',
+                            'route'        => 'admin.ambulances.index',
+                        ],
+                        [
+                            'text'       => 'create',
+                            'route'        => 'admin.ambulances.create',
+                        ],
+                    ]
                 ],
             ],
         ],
         ['header' => 'labels'],
-        [
-            'text'       => 'create',
-            'icon_color' => 'red',
-            'route'        => 'admin.ambulances.create',
-        ],
+        
         [
             'text'       => 'Status',
             'icon_color' => 'yellow',
