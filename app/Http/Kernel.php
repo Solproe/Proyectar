@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\AmbulanceActive;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -21,6 +22,11 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+        
+    ];
+
+    protected $middlewareAliases = [
+        'ambulance.active' => \App\Http\Middleware\AmbulanceActive::class,
     ];
 
     /**

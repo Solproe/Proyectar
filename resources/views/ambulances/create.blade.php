@@ -8,19 +8,19 @@
                 {!! Form::label('Plate', '') !!}
                 {!! Form::text('plate', null, [
                 'class' => 'form-control',
-                'placeholder' => 'Enter Name Of Role',
+                'placeholder' => 'Enter Plate',
                 ]) !!}
             </div>
             <div class="col">
                 {!! Form::label('Type', '') !!}
                 {!! Form::text('type', null, [
                 'class' => 'form-control',
-                'placeholder' => 'Enter Name Of Role',
+                'placeholder' => 'Enter Type',
                 ]) !!}
             </div>
             <div class="col">
                 {!! Form::label('Status', '') !!}
-                {!! Form::select('status', $status, null, [
+                {!! Form::select('id_status', $status, null, [
                 'class' => 'form-control',
                 'placeholder' => '',
                 ]) !!}
@@ -29,7 +29,7 @@
                 {!! Form::label('Token', '') !!}
                 {!! Form::text('device_token', null, [
                 'class' => 'form-control',
-                'placeholder' => 'Enter Name Of Role',
+                'placeholder' => 'Device Token',
                 ]) !!}
             </div>
             <div class="col align-self-end">

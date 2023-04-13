@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\APIs\PhoneRegister;
+use App\Http\Controllers\APIs\tugps24API;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,3 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('registerPhone', [PhoneRegister::class, 'register'])->name('api.registerPhone');
+
+Route::get('tugps24', [tugps24API::class, 'index'])->name('api.tugps24');

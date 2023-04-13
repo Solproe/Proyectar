@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\APIs;
 
 use App\Http\Controllers\Controller;
+use App\Http\Middleware\AmbulanceActive;
 use App\Models\Ambulances\Ambulances;
 use App\Models\APIs\geocodingGoogleAPI;
 use App\Models\APIs\tugps24API as APIsTugps24API;
@@ -10,6 +11,11 @@ use PhpParser\Node\Expr\Cast\String_;
 
 class tugps24API extends Controller
 {
+
+    public function index()
+    {
+        return view('api.index');
+    }
 
     public function getDataFromAPI()
     {
@@ -29,9 +35,9 @@ class tugps24API extends Controller
             {
                 $plate = substr($data->Plate, 0, 6);
 
-                $ambulance = Ambulances::where('plate', $plate)->get();
+                $ambulance = Ambulances::where('plate', $plate)->first();
 
-                if ($ambulance != null)
+                if ($ambulance != null && $ambulance->status->name == 'active')
                 {
                     $address = $geoCodingGoogleAPI->getInverseGeoCoding([$data->Latitud, $data->Longitud]);
     
@@ -39,7 +45,8 @@ class tugps24API extends Controller
                                 'Address' => $address,
                                 'Distance' => 0,
                                 'Latitud' => $data->Latitud,
-                                'Longitud' => $data->Longitud];
+                                'Longitud' => $data->Longitud,
+                                'Status' => $ambulance->status->name];
         
                     $matriz [] = $newData;
                 }

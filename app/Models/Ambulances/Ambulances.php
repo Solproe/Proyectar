@@ -16,11 +16,11 @@ class Ambulances extends Model
         'id',
         'plate',
         'type',
-        'status',
+        'id_status',
         'device_token'
     ];
 
     public function status () {
-        return $this->belongsTo(status::class);
+        return $this->belongsTo(status::class, 'id_status');
     }
 }

@@ -18,8 +18,8 @@ return new class extends Migration
             $table->id();
             $table->string('plate')->unique();
             $table->string('type');
-            $table->unsignedBigInteger('status');
-            $table->foreign('status')->references('id')->on('status');
+            $table->unsignedBigInteger('id_status');
+            $table->foreign('id_status')->references('id')->on('status');
             $table->string('device_token');
             $table->timestamps();
         });

@@ -18,6 +18,6 @@ class status extends Model
     ];
 
     public function ambulances () {
-        return $this->hasMany(Ambulances::class);
+        return $this->hasMany(Ambulances::class, 'id');
     }
 }

@@ -45,11 +45,9 @@ class AmbulancesController extends Controller
         $request->validate([
             'plate' => 'required|unique:ambulances',
             'type' => 'required',
-            'status' => 'required',
+            'id_status' => 'required',
             'device_token' => 'required|unique:ambulances',
         ]);
-
-        
 
         $ambulances = new Ambulances();
         $ambulances->fill($request->all());
@@ -84,7 +82,7 @@ class AmbulancesController extends Controller
 
         $status = status::orderBy('id')->pluck('name', 'id');
 
-        return view('ambulances.create', compact('status', 'ambulance'));
+        return view('ambulances.edit', compact('status', 'ambulance'));
     }
 
     /**
@@ -96,19 +94,12 @@ class AmbulancesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $ambulance = Ambulances::where('id', $id)->first();
-
-        $ambulance->plate = $request->plate;
-
-        $ambulance->type = $request->type;
-
-        $ambulance->plate = $request->plate;
-
-        $ambulance->status = $request->status;
-
-        $ambulance->device_token = $request->device_token;
-
-        $ambulance->save();
+        $ambulance = Ambulances::where('id', $id)->update([
+            'plate' => $request->plate,
+            'type'  => $request->type,
+            'id_status' => $request->status,
+            'device_token'  => $request->device_token,
+        ]);
 
         return redirect()->route('admin.ambulances.index');
     }
@@ -121,6 +112,8 @@ class AmbulancesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $ambulance = Ambulances::where('id', $id)->first()->delete();
+
+        return redirect()->route('admin.ambulances.index');
     }
 }

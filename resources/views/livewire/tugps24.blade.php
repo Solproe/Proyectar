@@ -190,7 +190,7 @@
                 <th scope="row">{{$num}}</th>
                 <td>{{$device['Plate']}}</td>
                 <td>{{$device['Address']}}</td>
-                <td>Status...</td>
+                <td>{{$device['Status']}}</td>
                 @if($matriz == null)
                 <td align="center">{{$device['Distance']}}</td>
                 @else

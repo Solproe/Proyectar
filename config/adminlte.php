@@ -368,10 +368,11 @@ return [
             'icon_color' => 'yellow',
             'route'        => 'requests.index',
         ],
+        //tugps24 API
         [
             'text'       => 'Ambulances',
             'icon_color' => 'cyan',
-            'route'        => 'admin.ambulances.index',
+            'route'        => 'api.tugps24',
         ],
     ],
 

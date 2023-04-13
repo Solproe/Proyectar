@@ -20,14 +20,15 @@
                 <th scope="row">{{$ambulance->id}}</th>
                 <td>{{$ambulance->plate}}</td>
                 <td>{{$ambulance->type}}</td>
-                <td>{{$ambulance->status}}</td>
+                <td>{{$ambulance->status->name}}</td>
                 <td>
                     <form action="{{ route('admin.ambulances.edit', $ambulance->id) }}">
                         @csrf
                         <button class="btn btn-outline-warning">edit</button>
                     </form>
-                    <form action="{{ route('admin.ambulances.destroy', $ambulance->id) }}">
+                    <form action="{{ route('admin.ambulances.destroy', $ambulance->id) }}" method="POST">
                         @csrf
+                        @method('DELETE')
                         <button class="btn btn-outline-danger">delete</button>
                     </form>
                 </td>
