@@ -307,12 +307,20 @@ return [
             'url'  => 'admin/blog',
             'can'  => 'manage-blog',
         ],
+        //create requests
         [
-            'text'        => 'Call Center',
-            'url'         => 'admin/pages',
-            'icon'        => 'far fa-fw fa-file',
-            'label'       => 4,
-            'label_color' => 'success',
+            'text'        => 'Requests',
+            'submenu'     => [
+                [
+                    'text'  => 'index',
+                    'route'   => 'admin.requests.index',
+                ],
+                [
+                    'text'  => 'create',
+                    'route'   => 'admin.requests.create',
+                ],
+            ],
+            
         ],
         ['header' => 'account_settings'],
         [
@@ -366,13 +374,13 @@ return [
         [
             'text'       => 'Status',
             'icon_color' => 'yellow',
-            'route'        => 'requests.index',
+            'route'        => 'admin.tugps24.status',
         ],
         //tugps24 API
         [
             'text'       => 'Ambulances',
             'icon_color' => 'cyan',
-            'route'        => 'admin.tugps24',
+            'route'        => 'admin.tugps24.index',
         ],
     ],
 

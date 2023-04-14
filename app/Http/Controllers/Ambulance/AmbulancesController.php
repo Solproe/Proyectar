@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Ambulances\Ambulances;
 use App\Models\Status\status;
 use App\Models\User;
+use App\Services\FirebaseRealTimeDatabase;
 use App\Services\FirebaseService;
 use Illuminate\Http\Request;
 
@@ -18,10 +19,10 @@ class AmbulancesController extends Controller
      */
     public function index()
     {
-        $firebase = new FirebaseService();
+        $firebase = new FirebaseService(config('services.tugps24.db.solproe-solproyectar'));
 
-        
-        
+        $RTdatabase = new FirebaseRealTimeDatabase($firebase->getFirebase(), config('services.tugps24.db.solproe-solproyectar'));
+
         $ambulances = Ambulances::all();
 
         return view('ambulances.index', compact('ambulances'));

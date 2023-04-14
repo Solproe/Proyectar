@@ -1,5 +1,5 @@
 @extends('adminlte::page')
 
 @section('content')
-    <h1>Index</h1>
+    <h1>edit</h1>
 @endsection

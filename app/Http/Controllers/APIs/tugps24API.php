@@ -46,7 +46,7 @@ class tugps24API extends Controller
                                 'Distance' => 0,
                                 'Latitud' => $data->Latitud,
                                 'Longitud' => $data->Longitud,
-                                'Status' => 'none'];
+                                'Status' => null];
         
                     $matriz [] = $newData;
                 }
@@ -60,5 +60,10 @@ class tugps24API extends Controller
         }
 
         return $matriz;
+    }
+
+    public function status()
+    {
+        return view('api.tuGPS24Status');
     }
 }

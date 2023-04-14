@@ -10,10 +10,12 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::resource('ambulances', AmbulancesController::class)->names('admin.ambulances');
 
-    Route::resource('requests', RequestController::class)->names('requests');
+    Route::resource('requests', RequestController::class)->names('admin.requests');
 
     Route::resource('status', StatusController::class)->names('admin.status');
 
-    Route::get('tugps24', [tugps24API::class, 'index'])->name('admin.tugps24');
+    Route::get('tugps24', [tugps24API::class, 'index'])->name('admin.tugps24.index');
+
+    Route::get('tugps24Status', [tugps24API::class, 'status'])->name('admin.tugps24.status');
 
 });

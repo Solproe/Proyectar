@@ -17,11 +17,13 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_ambulance');
             $table->foreign('id_ambulance')->references('id')->on('ambulances');
-            $table->string('status');
+            $table->unsignedBigInteger('id_status');
+            $table->foreign('id_status')->references('id')->on('status');
             $table->string('type');
-            $table->json('details');
-            $table->dateTime('started');
-            $table->dateTime('finished');
+            $table->jsonb('details');
+            $table->dateTime('start')->nullable();
+            $table->dateTime('end')->nullable();
+            $table->timestamps();
         });
     }
 
