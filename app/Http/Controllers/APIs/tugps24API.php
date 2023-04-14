@@ -37,7 +37,7 @@ class tugps24API extends Controller
 
                 $ambulance = Ambulances::where('plate', $plate)->first();
 
-                if ($ambulance != null && $ambulance->status->name == 'active')
+                if ($data)
                 {
                     $address = $geoCodingGoogleAPI->getInverseGeoCoding([$data->Latitud, $data->Longitud]);
     
@@ -46,7 +46,7 @@ class tugps24API extends Controller
                                 'Distance' => 0,
                                 'Latitud' => $data->Latitud,
                                 'Longitud' => $data->Longitud,
-                                'Status' => $ambulance->status->name];
+                                'Status' => 'none'];
         
                     $matriz [] = $newData;
                 }

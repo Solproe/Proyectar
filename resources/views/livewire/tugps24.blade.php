@@ -1,4 +1,5 @@
 <div>
+    @csrf
     @if($data != null)
     <header>
         <div class="row" style="padding: 20px 10px 20px 10px;">

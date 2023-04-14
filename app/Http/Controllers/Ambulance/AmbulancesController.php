@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Ambulances\Ambulances;
 use App\Models\Status\status;
 use App\Models\User;
+use App\Services\FirebaseService;
 use Illuminate\Http\Request;
 
 class AmbulancesController extends Controller
@@ -17,6 +18,10 @@ class AmbulancesController extends Controller
      */
     public function index()
     {
+        $firebase = new FirebaseService();
+
+        
+        
         $ambulances = Ambulances::all();
 
         return view('ambulances.index', compact('ambulances'));

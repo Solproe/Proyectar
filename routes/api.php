@@ -21,5 +21,3 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('registerPhone', [PhoneRegister::class, 'register'])->name('api.registerPhone');
-
-Route::get('tugps24', [tugps24API::class, 'index'])->name('api.tugps24');

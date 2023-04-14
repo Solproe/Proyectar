@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class FirebaseFirestore extends Controller
 {
     public function message(){
-        $factory = (new Factory())
+        $factory = (new Factory)
         ->withProjectId('my-project')
         ->withDatabaseUri('https://my-project.firebaseio.com');
     }

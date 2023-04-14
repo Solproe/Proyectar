@@ -7,9 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class tugps24API
 {
-    public $API_URL = 'https://core.optimus.tugps24.com/erp/optimusapi/list?token=';
-
-    public $API_TOKEN = '616d6270726f796563746172~416d6250726f79656374617231323321';
 
     public function request()
     {
@@ -19,7 +16,7 @@ class tugps24API
             'Content-Type:application/json',
         );
 
-        curl_setopt($request, CURLOPT_URL, $this->API_URL.$this->API_TOKEN);
+        curl_setopt($request, CURLOPT_URL, config('services.tugps24.url').config('services.tugps24.token'));
 
         curl_setopt($request, CURLOPT_HTTPHEADER, $headers);
 

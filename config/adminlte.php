@@ -372,7 +372,7 @@ return [
         [
             'text'       => 'Ambulances',
             'icon_color' => 'cyan',
-            'route'        => 'api.tugps24',
+            'route'        => 'admin.tugps24',
         ],
     ],
 
