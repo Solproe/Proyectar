@@ -2,6 +2,7 @@
 
 namespace App\Models\Ambulances;
 
+use App\Models\Requests\Requests;
 use App\Models\Status\status;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -20,7 +21,13 @@ class Ambulances extends Model
         'device_token'
     ];
 
-    public function status () {
+    public function status()
+    {
         return $this->belongsTo(status::class, 'id_status');
+    }
+
+    public function requests()
+    {
+        return $this->hasMany(Requests::class, 'id');
     }
 }

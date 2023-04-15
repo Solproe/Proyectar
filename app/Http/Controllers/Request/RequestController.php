@@ -3,15 +3,14 @@
 namespace App\Http\Controllers\Request;
 
 use App\Http\Controllers\Controller;
-use App\Models\Data\Requests;
-use App\Models\Requests\Requests as RequestsRequests;
+use App\Models\Requests\Requests;
 use Illuminate\Http\Request;
 
 class RequestController extends Controller
 {
     public function index() {
 
-        $requests = RequestsRequests::all();
+        $requests = Requests::all();
 
         return view('requests.index', compact('requests'));
     }

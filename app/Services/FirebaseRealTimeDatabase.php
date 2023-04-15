@@ -31,6 +31,11 @@ class FirebaseRealTimeDatabase
 
         $this->data = $this->reference->getSnapshot();
 
+        foreach ($this->data as $dat)
+        {
+            dd($dat);
+        }
+
         return $this->data;
     }
 }

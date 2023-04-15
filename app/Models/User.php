@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Requests\Requests;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -28,6 +29,7 @@ class User extends Authenticatable
      * @var string[]
      */
     protected $fillable = [
+        'id',
         'name',
         'email',
         'password',
@@ -63,4 +65,9 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function requests()
+    {
+        return $this->hasMany(Requests::class, 'id');
+    }
 }

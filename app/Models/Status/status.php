@@ -3,6 +3,7 @@
 namespace App\Models\Status;
 
 use App\Models\Ambulances\Ambulances;
+use App\Models\Requests\Requests;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,7 +18,13 @@ class status extends Model
         'name'
     ];
 
-    public function ambulances () {
+    public function ambulances() 
+    {
         return $this->hasMany(Ambulances::class, 'id');
+    }
+
+    public function requests()
+    {
+        return $this->hasMany(Requests::class, 'id');
     }
 }

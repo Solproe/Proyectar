@@ -21,7 +21,10 @@ class AmbulancesController extends Controller
     {
         $firebase = new FirebaseService(config('services.tugps24.db.solproe-solproyectar'));
 
-        $RTdatabase = new FirebaseRealTimeDatabase($firebase->getFirebase(), config('services.tugps24.db.solproe-solproyectar'));
+        $RTdatabase = new FirebaseRealTimeDatabase($firebase
+                ->getFirebase(), config('services.tugps24.db.solproe-solproyectar'));
+
+        $RTdatabase->getRequest('requests');
 
         $ambulances = Ambulances::all();
 

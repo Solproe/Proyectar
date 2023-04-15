@@ -20,9 +20,12 @@ return new class extends Migration
             $table->unsignedBigInteger('id_status');
             $table->foreign('id_status')->references('id')->on('status');
             $table->string('type');
+            $table->unsignedBigInteger('id_user');
+            $table->foreign('id_user')->references('id')->on('users');
             $table->jsonb('details');
-            $table->dateTime('start')->nullable();
-            $table->dateTime('end')->nullable();
+            $table->string('address');
+            $table->dateTime('started')->nullable();
+            $table->dateTime('ended')->nullable();
             $table->timestamps();
         });
     }
