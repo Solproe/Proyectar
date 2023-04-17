@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\APIs\PhoneRegister;
 use App\Http\Controllers\APIs\tugps24API;
+use App\Http\Controllers\Request\RequestController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,4 +21,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('registerPhone', [PhoneRegister::class, 'register'])->name('api.registerPhone');
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+
+    Route::post('requests', RequestController::class)->names('api.requests');
+
+});
