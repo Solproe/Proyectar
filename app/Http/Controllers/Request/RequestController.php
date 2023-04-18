@@ -52,6 +52,7 @@ class RequestController extends Controller
             $this->typeRequest = 'urgency';
 
             dd($response);
+            //data
 
         }
         else
