@@ -1,9 +1,7 @@
 <?php
 
-use App\Http\Controllers\APIs\PhoneRegister;
-use App\Http\Controllers\APIs\tugps24API;
-use App\Http\Controllers\Request\RequestController;
-use Illuminate\Http\Request;
+
+use App\Http\Controllers\APIs\requestapi\RequestController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,12 +15,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::post('store', [RequestController::class, 'store'])->name('api.v1.store');
 
-Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
-    Route::post('requests', RequestController::class)->names('api.requests');
-
-});

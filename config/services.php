@@ -40,4 +40,8 @@ return [
         ],
     ],
 
+    'googleGeocoding' => [
+        'token' =>  env('TOKEN_API_GOOGLEGEOCODING'),
+        'url'   =>  env('URL_API_GOOGLEGEOCODING'),
+    ],
 ];

@@ -4,21 +4,22 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Facade;
 
-class AmbulanceActive
+class data extends Facade
 {
     /**
      * Handle an incoming request.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
-     * @return \App\Http\Controllers\Request\RequestController
+     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-
-
     public function handle(Request $request, Closure $next)
     {
 
-        return redirect()->route('login');
+        dd("datasss");
+
+        return $next("data");
     }
 }

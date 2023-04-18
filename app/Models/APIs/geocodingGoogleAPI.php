@@ -3,19 +3,16 @@
 namespace App\Models\APIs;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
 class geocodingGoogleAPI
 {
     use HasFactory;
 
-    public $API_TOKEN = 'AIzaSyAnqddMw77Up_4n-e4JPRx-eLgb-QvzNuw';
-
     public function getAddressGeocoding($address)
     {
         $ad = $address . ",valledupar,colombia";
 
-        $geo = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address='.urlencode($ad).'&key='.urlencode($this->API_TOKEN));
+        $geo = file_get_contents(config('services.googleGeocoding.url').urlencode($ad).'&key='.urlencode(config('services.googleGeocoding.token')));
 
         $geo = json_decode($geo, true);
 
@@ -33,11 +30,11 @@ class geocodingGoogleAPI
     {
         $geolocalization = str(str_replace(',', '.', $coordinate[0]) . ',' . str_replace(',', '.', $coordinate[1]));
 
-        $geo = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?latlng='.urlencode($geolocalization).'&key='.urlencode($this->API_TOKEN));
+        $geo = file_get_contents(config('services.googleGeocoding.url').urlencode($geolocalization).'&key='.urlencode(config('services.googleGeocoding.token')));
 
         $geo = json_decode($geo, true);
 
-        
+
 
         return $geo['results'][0]['formatted_address'];
     }

@@ -3,9 +3,7 @@
 namespace App\Models\Data;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Location\Coordinate;
-use Location\Distance\Haversine;
 use Location\Distance\Vincenty;
 use Location\Line;
 
