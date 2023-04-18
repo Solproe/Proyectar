@@ -32,8 +32,6 @@ class RequestController extends Controller
 
     public function store(Request $request)
     {
-        dd($request);
-
         $request->validate([
             'transType' =>  'required',
             'to'        =>  'required',
@@ -53,7 +51,7 @@ class RequestController extends Controller
         {
             $this->typeRequest = 'urgency';
 
-            dd($geoTo);
+            dd($response);
 
         }
         else

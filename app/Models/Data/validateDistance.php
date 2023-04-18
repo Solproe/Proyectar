@@ -25,4 +25,9 @@ class validateDistance
 
         return round($data / 1000, 3);
     }
+
+    public function nearestDevice($array)
+    {
+
+    }
 }
