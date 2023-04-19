@@ -2,6 +2,7 @@
 
 namespace App\Models\Data;
 
+use App\Models\Ambulances\Ambulances;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Location\Coordinate;
 use Location\Distance\Vincenty;
@@ -11,7 +12,9 @@ class validateDistance
 {
     use HasFactory;
 
-    public function getDistance(array $coordinate1, array $coordinate2)
+    public $id_ambulance;
+
+    public function getDistance(array $coordinate1, array $coordinate2): float
     {
         $line = new Line(
             new Coordinate(floatval(str_replace(',', '.', $coordinate2[0])), floatval(str_replace(',', '.',$coordinate2[1]))),
@@ -26,8 +29,38 @@ class validateDistance
         return round($data / 1000, 3);
     }
 
-    public function nearestDevice($array)
+    public function nearestDevice($devices, array $fate, $typeRequest): array
     {
+        $minDeviceDistance = null;
 
+        $oldDistance = null;
+
+        $newDistance = null;
+
+        foreach ($devices->TrackingSDT as $device)
+        {
+            $ambulace = Ambulances::where('plate', substr($device->Plate, 0, 6))->first();
+
+            if (isset($ambulace->type) && $ambulace->type == 'TAM' && $ambulace->status->name == 'active')
+            {
+                $newDistance = $this->getDistance([$device->Latitud, $device->Longitud], [$fate[0], $fate[1]]);
+
+                if ($oldDistance == null)
+                {
+                    $oldDistance = $newDistance;
+
+                    $minDeviceDistance = [$device, $ambulace->id];
+
+                    //array_push($minDeviceDistance, ['id_ambulance' => $ambulace->id]);
+                }
+                elseif ($newDistance <= $oldDistance)
+                {
+                    $minDeviceDistance = [$device, $ambulace->id];
+
+                }
+            }
+        }
+
+        return $minDeviceDistance;
     }
 }

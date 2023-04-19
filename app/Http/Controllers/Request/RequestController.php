@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Request;
 
 use App\Http\Controllers\Controller;
+use App\Models\Ambulances\Ambulances;
 use App\Models\APIs\geocodingGoogleAPI;
 use App\Models\APIs\tugps24API;
 use App\Models\Data\validateDistance;
@@ -30,18 +31,17 @@ class RequestController extends Controller
         return view('requests.create');
     }
 
+    /**
+     * receive request to save and push messages
+     */
+
     public function store(Request $request)
     {
-        $request->validate([
-            'transType' =>  'required',
-            'to'        =>  'required',
-        ]);
-
         $requests = new Requests();
 
         $tuGPS24 = new tugps24API();
 
-        $response = $tuGPS24->request();
+        $tuGPS24Ambulances = $tuGPS24->request();
 
         $geoCodingGoogleAPI = new geocodingGoogleAPI();
 
@@ -51,6 +51,15 @@ class RequestController extends Controller
         {
             $this->typeRequest = 'urgency';
 
+            $validateDistance = new validateDistance();
+
+            $nearestDevice = $validateDistance->nearestDevice($tuGPS24Ambulances, $geoTo, $this->typeRequest);
+
+            $requests->id_ambulance = $nearestDevice[1];
+
+            $request->
+
+            dd($requests);
         }
         else
         {
