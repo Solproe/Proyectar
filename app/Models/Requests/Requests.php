@@ -2,7 +2,7 @@
 
 namespace App\Models\Requests;
 
-use App\Models\Data\Ambulances;
+use App\Models\Ambulances\Ambulances;
 use App\Models\Status\status;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

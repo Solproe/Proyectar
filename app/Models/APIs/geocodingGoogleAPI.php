@@ -8,7 +8,7 @@ class geocodingGoogleAPI
 {
     use HasFactory;
 
-    public function getAddressGeocoding($address)
+    public function getAddressGeocoding($address): array
     {
         $ad = $address . ",valledupar,colombia";
 
@@ -23,7 +23,7 @@ class geocodingGoogleAPI
             $longitud = $geo['results'][0]['geometry']['location']['lng'];
         }
 
-        return [$latitud, $longitud];
+        return [floatval($latitud), floatval($longitud)];
     }
 
     public function getInverseGeoCoding(array $coordinate)

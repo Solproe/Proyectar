@@ -10,7 +10,7 @@
                     <th>Status</th>
                     <th>operator</th>
                     <th>Address</th>
-                    <th>Detatils</th>
+                    <th style="align-items:center;">Detatils</th>
                     <th>Started</th>
                 </tr>
             </thead>
@@ -21,7 +21,33 @@
                     <td> {{$request->type}} </td>
                     <td> {{$request->status->name}} </td>
                     <td> {{$request->users->name}} </td>
-                    <td> {{$request->details}} </td>
+                    <td> {{$request->address}} </td>
+                    <td>
+                        <table class="table table-striped table-responsive">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Identification</td>
+                                    <td>docType</td>
+                                    <td>Gender</td>
+                                    <td>Date</td>
+                                    <td>Hour</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <?php $details = $request->details;
+                                            $details = json_decode($details); ?>
+                                    <td> {{$details->patientName}} </td>
+                                    <td> {{$details->identification}} </td>
+                                    <td> {{$details->docType}} </td>
+                                    <td> {{$details->gender}} </td>
+                                    <td> {{$details->date}} </td>
+                                    <td> {{$details->hour}} </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
                     <td> {{$request->started}} </td>
                     <td> {{$request->finished}} </td>
                 </tr>

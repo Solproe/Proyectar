@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Request;
 
 use App\Http\Controllers\Controller;
-use App\Models\Ambulances\Ambulances;
 use App\Models\APIs\geocodingGoogleAPI;
 use App\Models\APIs\tugps24API;
 use App\Models\Data\validateDistance;
 use App\Models\Requests\Requests;
+use App\Models\Status\status;
 use Illuminate\Http\Request;
 
 /**
@@ -18,6 +18,17 @@ class RequestController extends Controller
 {
 
     public $typeRequest;
+
+    public $details = [
+        'patientName' => null,
+        'identification' => null,
+        'docType' => null,
+        'gender' => null,
+        'date' => null,
+        'hour' => null,
+        'from' => null,
+        'to' => null,
+    ];
 
     public function index() {
 
@@ -45,30 +56,121 @@ class RequestController extends Controller
 
         $geoCodingGoogleAPI = new geocodingGoogleAPI();
 
+        $status = status::select('id')->where('name', 'sent')->first();
+
         $geoTo = $geoCodingGoogleAPI->getAddressGeocoding($request->to);
+
+        $validateDistance = new validateDistance();
 
         if ($request->from == null && $request->transType == 'TAM')
         {
-            $this->typeRequest = 'urgency';
+            $this->typeRequest = ':Urgency';
 
-            $validateDistance = new validateDistance();
+            $nearestDevice = $validateDistance->nearestDevice($tuGPS24Ambulances, $geoTo, $request->transType);
 
-            $nearestDevice = $validateDistance->nearestDevice($tuGPS24Ambulances, $geoTo, $this->typeRequest);
+            $requests->id_ambulance = $nearestDevice->id;
 
-            $requests->id_ambulance = $nearestDevice[1];
+            $requests->id_status = $status->id;
 
-            $request->
+            $requests->type = $nearestDevice->type . $this->typeRequest;
 
-            dd($requests);
+            $requests->id_user = auth()->user()->id;
+
+            $requests->address = $request->to;
+
+            $this->details = [
+                'patientName' => null,
+                'identification' => null,
+                'docType' => null,
+                'gender' => null,
+                'date' => null,
+                'hour' => null,
+                'from' => null,
+                'to' =>$geoTo,
+            ];
+
+            $this->details = json_encode($this->details);
+
+            $requests->details = $this->details;
+
+            $requests->save();
+
+            return redirect()->route('admin.requests.index');
         }
-        else
+        elseif ($request->from != null && $request->transType == 'TAM')
         {
-            $this->typeRequest = 'normal';
+            $this->typeRequest = ':Normal';
 
             $geoFrom = $geoCodingGoogleAPI->getAddressGeocoding($request->from);
 
-        }
+            $nearestDevice = $validateDistance->nearestDevice($tuGPS24Ambulances, $geoFrom, $request->transType);
 
+            $requests->id_ambulance = $nearestDevice->id;
+
+            $requests->id_status = $status->id;
+
+            $requests->type = $nearestDevice->type . $this->typeRequest;
+
+            $requests->id_user = auth()->user()->id;
+
+            $requests->address = $request->from;
+
+            $this->details = [
+                'patientName' => $request->patientName,
+                'identification' => $request->identification,
+                'docType' => $request->docType,
+                'gender' => $request->gender,
+                'date' => $request->date,
+                'hour' => $request->hour,
+                'from' => $geoFrom,
+                'to' => $geoTo,
+            ];
+
+            $this->details = json_encode($this->details);
+
+            $requests->details = $this->details;
+
+            $requests->save();
+
+            return redirect()->route('admin.requests.index');
+        }
+        elseif ($request->from != null && $request->transType == 'TAB')
+        {
+            $this->typeRequest = ':Normal';
+
+            $geoFrom = $geoCodingGoogleAPI->getAddressGeocoding($request->from);
+
+            $nearestDevice = $validateDistance->nearestDevice($tuGPS24Ambulances, $geoFrom, $request->transType);
+
+            $requests->id_ambulance = $nearestDevice->id;
+
+            $requests->id_status = $status->id;
+
+            $requests->type = $nearestDevice->type . $this->typeRequest;
+
+            $requests->id_user = auth()->user()->id;
+
+            $requests->address = $request->from;
+
+            $this->details = [
+                'patientName' => $request->patientName,
+                'identification' => $request->identification,
+                'docType' => $request->docType,
+                'gender' => $request->gender,
+                'date' => $request->date,
+                'hour' => $request->hour,
+                'from' => $geoFrom,
+                'to' => $geoTo,
+            ];
+
+            $this->details = json_encode($this->details);
+
+            $requests->details = $this->details;
+
+            $requests->save();
+
+            return redirect()->route('admin.requests.index');
+        }
     }
 
     public function edit($id)

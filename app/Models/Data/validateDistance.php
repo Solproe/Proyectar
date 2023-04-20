@@ -29,7 +29,7 @@ class validateDistance
         return round($data / 1000, 3);
     }
 
-    public function nearestDevice($devices, array $fate, $typeRequest): array
+    public function nearestDevice($devices, array $fate, $typeRequest): Ambulances
     {
         $minDeviceDistance = null;
 
@@ -41,7 +41,7 @@ class validateDistance
         {
             $ambulace = Ambulances::where('plate', substr($device->Plate, 0, 6))->first();
 
-            if (isset($ambulace->type) && $ambulace->type == 'TAM' && $ambulace->status->name == 'active')
+            if (isset($ambulace->type) && $ambulace->type == $typeRequest && $ambulace->status->name == 'active')
             {
                 $newDistance = $this->getDistance([$device->Latitud, $device->Longitud], [$fate[0], $fate[1]]);
 
@@ -49,13 +49,11 @@ class validateDistance
                 {
                     $oldDistance = $newDistance;
 
-                    $minDeviceDistance = [$device, $ambulace->id];
-
-                    //array_push($minDeviceDistance, ['id_ambulance' => $ambulace->id]);
+                    $minDeviceDistance = $ambulace;
                 }
                 elseif ($newDistance <= $oldDistance)
                 {
-                    $minDeviceDistance = [$device, $ambulace->id];
+                    $minDeviceDistance = $ambulace;
 
                 }
             }
