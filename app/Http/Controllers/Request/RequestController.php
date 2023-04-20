@@ -8,7 +8,10 @@ use App\Models\APIs\tugps24API;
 use App\Models\Data\validateDistance;
 use App\Models\Requests\Requests;
 use App\Models\Status\status;
+use App\Services\FirebaseMessaging;
+use App\Services\FirebaseService;
 use Illuminate\Http\Request;
+use Kreait\Laravel\Firebase\Facades\Firebase;
 
 /**
  * @method static \Illuminate\Routing\RouteRegistrar middleware(array|string|null $middleware)
@@ -94,6 +97,10 @@ class RequestController extends Controller
             $requests->details = $this->details;
 
             $requests->save();
+
+            $firebase = new FirebaseService(config('services.tugps24.db.solproe-solproyectar'));
+
+            $messaging = new FirebaseMessaging($firebase->getFirebase());
 
             return redirect()->route('admin.requests.index');
         }
