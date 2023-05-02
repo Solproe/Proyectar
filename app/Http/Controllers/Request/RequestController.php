@@ -3,15 +3,16 @@
 namespace App\Http\Controllers\Request;
 
 use App\Http\Controllers\Controller;
+use App\Http\Middleware\data;
 use App\Models\APIs\geocodingGoogleAPI;
 use App\Models\APIs\tugps24API;
 use App\Models\Data\validateDistance;
 use App\Models\Requests\Requests;
 use App\Models\Status\status;
 use App\Services\FirebaseMessaging;
+use App\Services\FirebaseRealTimeDatabase;
 use App\Services\FirebaseService;
 use Illuminate\Http\Request;
-use Kreait\Laravel\Firebase\Facades\Firebase;
 
 /**
  * @method static \Illuminate\Routing\RouteRegistrar middleware(array|string|null $middleware)
@@ -32,6 +33,8 @@ class RequestController extends Controller
         'from' => null,
         'to' => null,
     ];
+
+    public $data;
 
     public function index() {
 
@@ -67,6 +70,7 @@ class RequestController extends Controller
 
         if ($request->from == null && $request->transType == 'TAM')
         {
+
             $this->typeRequest = ':Urgency';
 
             $nearestDevice = $validateDistance->nearestDevice($tuGPS24Ambulances, $geoTo, $request->transType);
@@ -89,18 +93,32 @@ class RequestController extends Controller
                 'date' => null,
                 'hour' => null,
                 'from' => null,
-                'to' =>$geoTo,
+                'to' => [
+                    'lat' => $geoTo[0],
+                    'lng' =>  $geoTo[1],
+                ],
             ];
+
+            $firebase = new FirebaseService(config('services.tugps24.db.solproe-solproyectar'));
+
+            $database = new FirebaseRealTimeDatabase($firebase->getFirebase(), config('services.tugps24.db.solproe-solproyectar'));
+
+            $this->data = [
+                'plate' => $nearestDevice->plate,
+                'type'  => $nearestDevice->type . $this->typeRequest,
+                'status' => $status->name,
+                'operator' => auth()->user()->name,
+                'address' => $request->to,
+                'details' => $this->details,
+            ];
+
+            $database->saveRequest("requests", $this->data);
 
             $this->details = json_encode($this->details);
 
             $requests->details = $this->details;
 
             $requests->save();
-
-            $firebase = new FirebaseService(config('services.tugps24.db.solproe-solproyectar'));
-
-            $messaging = new FirebaseMessaging($firebase->getFirebase());
 
             return redirect()->route('admin.requests.index');
         }
@@ -129,9 +147,30 @@ class RequestController extends Controller
                 'gender' => $request->gender,
                 'date' => $request->date,
                 'hour' => $request->hour,
-                'from' => $geoFrom,
-                'to' => $geoTo,
+                'from' => [
+                    'lat' => $geoFrom[0],
+                    'lng' => $geoFrom[1],
+                ],
+                'to' => [
+                    'lat' => $geoTo[0],
+                    'lng' => $geoTo[1],
+                ],
             ];
+
+            $firebase = new FirebaseService(config('services.tugps24.db.solproe-solproyectar'));
+            $RTdatabase = new FirebaseRealTimeDatabase($firebase
+                ->getFirebase(), config('services.tugps24.db.solproe-solproyectar'));
+
+                $this->data = [
+                    'plate' => $nearestDevice->plate,
+                    'type'  => $nearestDevice->type . $this->typeRequest,
+                    'status' => $status->name,
+                    'operator' => auth()->user()->name,
+                    'address' => $request->to,
+                    'details' => $this->details,
+                ];
+
+                $RTdatabase->saveRequest("requests" ,$this->data);
 
             $this->details = json_encode($this->details);
 
@@ -166,8 +205,14 @@ class RequestController extends Controller
                 'gender' => $request->gender,
                 'date' => $request->date,
                 'hour' => $request->hour,
-                'from' => $geoFrom,
-                'to' => $geoTo,
+                'from' => [
+                    'lat' => $geoFrom[0],
+                    'lng' => $geoFrom[1],
+                ],
+                'to' => [
+                    'lat' => $geoTo[0],
+                    'lng' => $geoTo[1],
+                ],
             ];
 
             $this->details = json_encode($this->details);

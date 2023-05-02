@@ -2,13 +2,14 @@
 
 namespace App\Services;
 
+use App\Http\Middleware\data;
+use Kreait\Firebase\Database\Snapshot as DatabaseSnapshot;
 use Kreait\Firebase\Factory;
-use SebastianBergmann\GlobalState\Snapshot;
 
 require '../vendor/autoload.php';
 
 
-class FirebaseRealTimeDatabase 
+class FirebaseRealTimeDatabase
 {
     public $firebase;
 
@@ -25,17 +26,18 @@ class FirebaseRealTimeDatabase
         $this->database = $this->firebase->createDatabase();
     }
 
-    public function getRequest($ref)
+    public function getRequest($ref): DatabaseSnapshot
     {
         $this->reference = $this->database->getReference($ref);
 
         $this->data = $this->reference->getSnapshot();
 
-        foreach ($this->data as $dat)
-        {
-            dd($dat);
-        }
-
         return $this->data;
+    }
+
+    public function saveRequest($ref, $data)
+    {
+        $this->reference = $this->database->getReference($ref);
+        $this->reference->getChild($data['plate'])->set($data);
     }
 }

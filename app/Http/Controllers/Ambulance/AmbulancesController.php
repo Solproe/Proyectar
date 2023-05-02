@@ -55,7 +55,6 @@ class AmbulancesController extends Controller
             'plate' => 'required|unique:ambulances',
             'type' => 'required',
             'id_status' => 'required',
-            'device_token' => 'required|unique:ambulances',
         ]);
 
         $ambulances = new Ambulances();
