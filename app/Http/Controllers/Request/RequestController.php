@@ -94,8 +94,8 @@ class RequestController extends Controller
                 'hour' => null,
                 'from' => null,
                 'to' => [
-                    'lat' => $geoTo[0],
-                    'lng' =>  $geoTo[1],
+                    'lat' => strval( $geoTo[0]),
+                    'lng' =>  strval($geoTo[1]),
                 ],
             ];
 
@@ -148,12 +148,12 @@ class RequestController extends Controller
                 'date' => $request->date,
                 'hour' => $request->hour,
                 'from' => [
-                    'lat' => $geoFrom[0],
-                    'lng' => $geoFrom[1],
+                    'lat' => strval($geoFrom[0]),
+                    'lng' => strval($geoFrom[1]),
                 ],
                 'to' => [
-                    'lat' => $geoTo[0],
-                    'lng' => $geoTo[1],
+                    'lat' => strval($geoTo[0]),
+                    'lng' => strval($geoTo[1]),
                 ],
             ];
 
