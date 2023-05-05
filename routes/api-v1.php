@@ -15,6 +15,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('store', [RequestController::class, 'store'])->name('api.v1.store');
+Route::post('request', [RequestController::class, 'update'])->name('api.v1.request.update');
 
-
+Route::post('update', [RequestController::class, 'update'])->name('api.v1.ambulance.update');
