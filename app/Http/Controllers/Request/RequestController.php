@@ -81,6 +81,8 @@ class RequestController extends Controller
 
             $requests->type = $nearestDevice->type . $this->typeRequest;
 
+            $nearestDevice->update((['id_status' => 7]));
+
             $requests->id_user = auth()->user()->id;
 
             $requests->address = $request->to;
@@ -94,14 +96,16 @@ class RequestController extends Controller
                 'hour' => null,
                 'from' => null,
                 'to' => [
-                    'lat' => strval( $geoTo[0]),
-                    'lng' =>  strval($geoTo[1]),
+                    'lat' => null,
+                    'lng' =>  null,
                 ],
             ];
 
             $firebase = new FirebaseService(config('services.tugps24.db.solproe-solproyectar'));
 
             $database = new FirebaseRealTimeDatabase($firebase->getFirebase(), config('services.tugps24.db.solproe-solproyectar'));
+
+            $message = new FirebaseMessaging($firebase->getFirebase(), config('services.tugps24.db.solproe-solproyectar'));
 
             $this->data = [
                 'plate' => $nearestDevice->plate,
@@ -137,6 +141,8 @@ class RequestController extends Controller
             $requests->type = $nearestDevice->type . $this->typeRequest;
 
             $requests->id_user = auth()->user()->id;
+
+            $nearestDevice->update((['id_status' => 7]));
 
             $requests->address = $request->from;
 

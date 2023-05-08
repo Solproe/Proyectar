@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Ambulance;
 use App\Http\Controllers\Controller;
 use App\Models\Ambulances\Ambulances;
 use App\Models\Status\status;
-use App\Models\User;
 use App\Services\FirebaseRealTimeDatabase;
 use App\Services\FirebaseService;
 use Illuminate\Http\Request;

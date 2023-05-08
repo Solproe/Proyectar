@@ -41,7 +41,7 @@ class validateDistance
         {
             $ambulace = Ambulances::where('plate', substr($device->Plate, 0, 6))->first();
 
-            if (isset($ambulace->type) && $ambulace->type == $typeRequest && $ambulace->status->name == 'active')
+            if (isset($ambulace->type) && $ambulace->type == $typeRequest && $ambulace->status->name == 'free')
             {
                 $newDistance = $this->getDistance([$device->Latitud, $device->Longitud], [$fate[0], $fate[1]]);
 

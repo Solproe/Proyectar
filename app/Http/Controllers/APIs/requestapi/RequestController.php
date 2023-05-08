@@ -24,17 +24,17 @@ class RequestController extends Controller
     public function update(Request $request)
     {
         $ambulance = Ambulances::where('plate', $request->plate)->first();
-        $requests = Requests::where('id_ambulance', $ambulance->id_ambulance);
-        $status = status::where('name', $request->status);
+        $requests = Requests::where('id_ambulance', $ambulance->id)->first();
+        $status = status::where('name', $request->status)->first();
 
         if ($request->status == 'accepted')
         {
-            $ambulance->update(['status' => 7]);
             $requests->update(['id_status' => $status->id]);
+            $ambulance->update(['id_status' => 8]);
         }
 
         $data = [
-            'data' => $requests->status()
+            'response' => "ok"
         ];
 
         $data = json_encode($data);
