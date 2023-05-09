@@ -68,6 +68,12 @@ class RequestController extends Controller
 
         $validateDistance = new validateDistance();
 
+        $firebase = new FirebaseService(config('services.tugps24.db.solproe-solproyectar'));
+
+        $database = new FirebaseRealTimeDatabase($firebase->getFirebase(), config('services.tugps24.db.solproe-solproyectar'));
+
+        $message = new FirebaseMessaging($firebase->getFirebase(), config('services.tugps24.db.solproe-solproyectar'));
+
         if ($request->from == null && $request->transType == 'TAM')
         {
 
@@ -101,12 +107,6 @@ class RequestController extends Controller
                 ],
             ];
 
-            $firebase = new FirebaseService(config('services.tugps24.db.solproe-solproyectar'));
-
-            $database = new FirebaseRealTimeDatabase($firebase->getFirebase(), config('services.tugps24.db.solproe-solproyectar'));
-
-            $message = new FirebaseMessaging($firebase->getFirebase(), config('services.tugps24.db.solproe-solproyectar'));
-
             $this->data = [
                 'plate' => $nearestDevice->plate,
                 'type'  => $nearestDevice->type . $this->typeRequest,
@@ -123,6 +123,8 @@ class RequestController extends Controller
             $requests->details = $this->details;
 
             $requests->save();
+
+            $message->send($requests);
 
             return redirect()->route('admin.requests.index');
         }
@@ -141,8 +143,6 @@ class RequestController extends Controller
             $requests->type = $nearestDevice->type . $this->typeRequest;
 
             $requests->id_user = auth()->user()->id;
-
-            $nearestDevice->update((['id_status' => 7]));
 
             $requests->address = $request->from;
 
@@ -163,11 +163,10 @@ class RequestController extends Controller
                 ],
             ];
 
-            $firebase = new FirebaseService(config('services.tugps24.db.solproe-solproyectar'));
             $RTdatabase = new FirebaseRealTimeDatabase($firebase
                 ->getFirebase(), config('services.tugps24.db.solproe-solproyectar'));
 
-                $this->data = [
+            $this->data = [
                     'plate' => $nearestDevice->plate,
                     'type'  => $nearestDevice->type . $this->typeRequest,
                     'status' => $status->name,
@@ -176,7 +175,11 @@ class RequestController extends Controller
                     'details' => $this->details,
                 ];
 
-                $RTdatabase->saveRequest("requests" ,$this->data);
+            $message->send($requests);
+
+            $nearestDevice->update((['id_status' => 7]));
+
+            $RTdatabase->saveRequest("requests" ,$this->data);
 
             $this->details = json_encode($this->details);
 

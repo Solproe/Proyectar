@@ -23,8 +23,8 @@ class FirebaseMessaging
 
     public function send(Requests $requests)
     {
-        $message = CloudMessage::withTarget('Token', $requests->ambulances->token)
-        ->withNotification(Notification::create($requests->type, 'Body'))
+        $message = CloudMessage::withTarget('Token', $requests->ambulances->device_token)
+        ->withNotification(Notification::create($requests->type, $requests->address))
         ->withData(['salut' => 'hola']);
 
         $this->messaging->send($message);
