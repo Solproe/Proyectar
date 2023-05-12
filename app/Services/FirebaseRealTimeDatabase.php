@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Http\Middleware\data;
+use App\Models\Ambulances\Ambulances;
 use Kreait\Firebase\Database\Snapshot as DatabaseSnapshot;
 use Kreait\Firebase\Factory;
 
@@ -39,5 +40,19 @@ class FirebaseRealTimeDatabase
     {
         $this->reference = $this->database->getReference($ref);
         $this->reference->getChild($data['plate'])->set($data);
+    }
+
+    public function updateTokens()
+    {
+        $ambulances = Ambulances::all();
+
+        foreach ($ambulances as $ambulance)
+        {
+            $this->reference = $this->database->getReference();
+
+            $ds = $this->reference->getChild($ambulance->plate)->getSnapshot()->getValue();
+
+            $ambulance->update(['device_token' => $ds[$ambulance->plate]]);
+        }
     }
 }

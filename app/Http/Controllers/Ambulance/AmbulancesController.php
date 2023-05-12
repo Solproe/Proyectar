@@ -123,4 +123,15 @@ class AmbulancesController extends Controller
 
         return redirect()->route('admin.ambulances.index');
     }
+
+    public function updateTokens()
+    {
+        $firebase = new FirebaseService(config('services.tugps24.db.solproe-solproyectar'));
+
+        $RTdatabase = new FirebaseRealTimeDatabase($firebase->getFirebase(), 'https://solproyectar-6f96d-default-rtdb.firebaseio.com/');
+
+        $RTdatabase->updateTokens();
+
+        return redirect()->route('admin.ambulances.index');
+    }
 }

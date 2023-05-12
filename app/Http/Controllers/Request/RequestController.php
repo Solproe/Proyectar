@@ -102,8 +102,8 @@ class RequestController extends Controller
                 'hour' => null,
                 'from' => null,
                 'to' => [
-                    'lat' => null,
-                    'lng' =>  null,
+                    'lat' => strval($geoTo[0]),
+                    'lng' => strval($geoTo[1]),
                 ],
             ];
 

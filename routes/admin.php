@@ -6,7 +6,9 @@ use App\Http\Controllers\Request\RequestController;
 use App\Http\Controllers\Status\StatusController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+Route::middleware(['auth:sanctum', 'verified'])->group(function ()
+{
+    Route::get('update/token', [AmbulancesController::class, 'updateTokens'])->name('admin.ambulances.token');
 
     Route::resource('ambulances', AmbulancesController::class)->names('admin.ambulances');
 

@@ -1,6 +1,16 @@
 @extends('adminlte::page')
 
 @section('content')
+
+<header>
+    <form action="{{ route('admin.ambulances.token') }}">
+        <button class="btn btn-outline-primary">
+            Update Tokens
+        </button>
+    </form>
+
+</header>
+
 <table class="table">
         <thead>
             <tr>
